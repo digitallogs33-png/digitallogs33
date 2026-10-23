@@ -1,0 +1,6 @@
+{
+  "name": "Digital Logs",
+  "description": "Authorized digital services marketplace offering subscriptions, online privacy tools, and legitimate social media marketing packages.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
