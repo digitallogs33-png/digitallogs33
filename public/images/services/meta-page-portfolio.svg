@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080D1A" />
+      <stop offset="50%" stop-color="#0D1B36" />
+      <stop offset="100%" stop-color="#050812" />
+    </linearGradient>
+    <radialGradient id="metaGlow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#0081FB" stop-opacity="0.3" />
+      <stop offset="50%" stop-color="#00D2FF" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#142442" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#0B1324" stop-opacity="0.95" />
+    </linearGradient>
+    <linearGradient id="metaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0081FB" />
+      <stop offset="50%" stop-color="#0064E0" />
+      <stop offset="100%" stop-color="#00C4FF" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad)" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.06" stroke="#0081FB" stroke-width="1">
+    <path d="M0 60 H800 M0 120 H800 M0 180 H800 M0 240 H800 M0 300 H800 M0 360 H800 M0 420 H800 M0 480 H800 M0 540 H800" />
+    <path d="M80 0 V600 M160 0 V600 M240 0 V600 M320 0 V600 M400 0 V600 M480 0 V600 M560 0 V600 M640 0 V600 M720 0 V600" />
+  </g>
+
+  <!-- Glow -->
+  <circle cx="400" cy="235" r="280" fill="url(#metaGlow)" />
+
+  <!-- Frame -->
+  <rect x="24" y="24" width="752" height="552" rx="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+  <rect x="25" y="25" width="750" height="550" rx="27" fill="none" stroke="#0081FB" stroke-width="1" opacity="0.25" />
+
+  <!-- Central Card Platform -->
+  <rect x="270" y="105" width="260" height="260" rx="44" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+
+  <!-- Meta Business Suite Emblem & Infinity Loop -->
+  <g transform="translate(400, 225)">
+    <!-- Meta Infinity Loop Graphic -->
+    <path d="M-45 -22 C-68 -22 -82 -4 -82 20 C-82 44 -64 62 -42 62 C-22 62 -8 46 0 25 C8 46 22 62 42 62 C64 62 82 44 82 20 C82 -4 68 -22 45 -22 C28 -22 14 -10 0 10 C-14 -10 -28 -22 -45 -22 Z M-42 45 C-56 45 -66 34 -66 20 C-66 6 -54 -5 -42 -5 C-30 -5 -20 6 -14 20 C-20 34 -30 45 -42 45 Z M42 45 C30 45 20 34 14 20 C20 6 30 -5 42 -5 C54 -5 66 6 66 20 C66 34 56 45 42 45 Z" fill="url(#metaGrad)" />
+    
+    <!-- Mini Page Badge in Upper Right -->
+    <circle cx="58" cy="-35" r="22" fill="#1877F2" stroke="#0D1B36" stroke-width="4" />
+    <!-- Page / Portfolio icon inside badge -->
+    <path d="M50 -42 H66 V-28 H50 Z" fill="#FFFFFF" rx="2" />
+    <path d="M54 -38 H62 M54 -34 H60 M54 -30 H58" stroke="#1877F2" stroke-width="1.5" stroke-linecap="round" />
+
+    <!-- Verified Checkmark Badge in Upper Left -->
+    <circle cx="-58" cy="-35" r="20" fill="#00C4FF" stroke="#0D1B36" stroke-width="4" />
+    <path d="M-64 -35 L-60 -31 L-52 -39" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- Title & Details -->
+  <g transform="translate(400, 420)" text-anchor="middle">
+    <!-- Category pill -->
+    <rect x="-120" y="-32" width="240" height="28" rx="14" fill="rgba(0,129,251,0.12)" stroke="rgba(0,129,251,0.4)" stroke-width="1" />
+    <text x="0" y="-14" fill="#0081FB" font-family="system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">FACEBOOK MARKETING</text>
+    
+    <!-- Title -->
+    <text x="0" y="32" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="28" font-weight="800" letter-spacing="-0.5">Meta Business Page Setup</text>
+    <text x="0" y="62" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="15" font-weight="500">Business Portfolio • Verification • CTA &amp; Role Setup</text>
+  </g>
+
+  <!-- Feature Pills -->
+  <g transform="translate(180, 520)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="18" cy="17" r="4" fill="#0081FB" />
+    <text x="30" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Meta Portfolio</text>
+
+    <!-- Pill 2 -->
+    <rect x="155" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="173" cy="17" r="4" fill="#00D2FF" />
+    <text x="185" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Verified Setup</text>
+
+    <!-- Pill 3 -->
+    <rect x="310" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="328" cy="17" r="4" fill="#10B981" />
+    <text x="340" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">100% Policy Safe</text>
+  </g>
+</svg>

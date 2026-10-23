@@ -143,7 +143,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [products, setProducts] = useState<Product[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.PRODUCTS);
-      return saved ? JSON.parse(saved) : INITIAL_PRODUCTS;
+      if (saved) {
+        const parsed: Product[] = JSON.parse(saved);
+        return parsed.map((p) => {
+          const initialMatch = INITIAL_PRODUCTS.find((ip) => ip.id === p.id);
+          if (initialMatch && (!p.image || p.image.includes('/src/assets/images'))) {
+            return { ...p, image: initialMatch.image };
+          }
+          return p;
+        });
+      }
+      return INITIAL_PRODUCTS;
     } catch {
       return INITIAL_PRODUCTS;
     }
@@ -152,7 +162,20 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [orders, setOrders] = useState<Order[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.ORDERS);
-      return saved ? JSON.parse(saved) : INITIAL_ORDERS;
+      if (saved) {
+        const parsed: Order[] = JSON.parse(saved);
+        return parsed.map((o) => ({
+          ...o,
+          items: o.items.map((item) => {
+            const initialMatch = INITIAL_PRODUCTS.find((ip) => ip.id === item.productId);
+            if (initialMatch && (!item.productImage || item.productImage.includes('/src/assets/images'))) {
+              return { ...item, productImage: initialMatch.image };
+            }
+            return item;
+          })
+        }));
+      }
+      return INITIAL_ORDERS;
     } catch {
       return INITIAL_ORDERS;
     }
@@ -161,7 +184,20 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.CART);
-      return saved ? JSON.parse(saved) : [];
+      if (saved) {
+        const parsed: CartItem[] = JSON.parse(saved);
+        return parsed.map((item) => {
+          const initialMatch = INITIAL_PRODUCTS.find((ip) => ip.id === item.productId);
+          if (initialMatch && (!item.productImage || item.productImage.includes('/src/assets/images'))) {
+            return {
+              ...item,
+              productImage: initialMatch.image
+            };
+          }
+          return item;
+        });
+      }
+      return [];
     } catch {
       return [];
     }

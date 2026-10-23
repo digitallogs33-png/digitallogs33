@@ -58,8 +58,8 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* Main Footer Links */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
           {/* Col 1 & 2: Brand Information */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2">
@@ -254,8 +254,8 @@ export const Footer: React.FC = () => {
             {/* Official Bank Account Summary Box */}
             <div className="mt-4 p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-[11px] space-y-1">
               <span className="text-slate-300 font-semibold block">Official Settlement Bank:</span>
-              <p className="text-slate-400">{siteSettings.bankName} - {siteSettings.bankAccountNumber}</p>
-              <p className="text-[10px] text-slate-500 truncate">{siteSettings.bankAccountName}</p>
+              <p className="text-slate-400 break-words">{siteSettings.bankName} - {siteSettings.bankAccountNumber}</p>
+              <p className="text-[10px] text-slate-500 break-words">{siteSettings.bankAccountName}</p>
             </div>
           </div>
         </div>

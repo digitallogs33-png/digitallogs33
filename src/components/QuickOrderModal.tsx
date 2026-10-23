@@ -104,23 +104,24 @@ export const QuickOrderModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-150">
-      <div className="relative w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-6 sm:p-8 my-8 text-slate-100 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-slate-950/80 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-150">
+      <div className="relative w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-4 sm:p-8 my-auto text-slate-100 max-h-[92vh] overflow-y-auto">
         {/* Close button */}
         <button
           onClick={() => setQuickOrderProduct(null)}
-          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors cursor-pointer min-w-[40px] min-h-[40px] flex items-center justify-center"
+          aria-label="Close modal"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Modal Header */}
-        <div className="mb-6 pb-4 border-b border-slate-800">
+        <div className="mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-800 pr-10 sm:pr-0">
           <div className="flex items-center gap-2 text-xs font-semibold text-cyan-400 uppercase tracking-wider mb-1">
-            <Zap className="w-4 h-4 fill-cyan-400" />
+            <Zap className="w-4 h-4 fill-cyan-400 shrink-0" />
             <span>Instant Order Request</span>
           </div>
-          <h2 className="text-xl font-bold text-white">
+          <h2 className="text-lg sm:text-xl font-bold text-white">
             {product.title}
           </h2>
           <p className="text-xs text-slate-400 mt-1">
@@ -193,7 +194,7 @@ export const QuickOrderModal: React.FC = () => {
               Customer & Delivery Details
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <label className="block text-xs font-medium text-slate-400 mb-1">
                   Full Name <span className="text-rose-400">*</span>
@@ -204,7 +205,7 @@ export const QuickOrderModal: React.FC = () => {
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
                   placeholder="e.g. Divine Michael"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
                 />
               </div>
 
@@ -218,12 +219,12 @@ export const QuickOrderModal: React.FC = () => {
                   value={customerEmail}
                   onChange={(e) => setCustomerEmail(e.target.value)}
                   placeholder="For voucher dispatch & invoice"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <label className="block text-xs font-medium text-slate-400 mb-1">
                   WhatsApp / Phone Number <span className="text-rose-400">*</span>
@@ -234,7 +235,7 @@ export const QuickOrderModal: React.FC = () => {
                   value={customerPhone}
                   onChange={(e) => setCustomerPhone(e.target.value)}
                   placeholder="+234 or international format"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
                 />
               </div>
 
@@ -247,7 +248,7 @@ export const QuickOrderModal: React.FC = () => {
                   value={targetAccountUrl}
                   onChange={(e) => setTargetAccountUrl(e.target.value)}
                   placeholder="e.g. facebook.com/yourpage"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
                 />
               </div>
             </div>
@@ -261,7 +262,7 @@ export const QuickOrderModal: React.FC = () => {
                 value={specialInstructions}
                 onChange={(e) => setSpecialInstructions(e.target.value)}
                 placeholder="Specific goals, target countries, preferred VPN device platform, etc."
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 resize-none"
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 resize-none"
               />
             </div>
           </div>
@@ -318,12 +319,12 @@ export const QuickOrderModal: React.FC = () => {
 
           {/* Bank Transfer Instructions Preview if bank_transfer selected */}
           {paymentMethod === 'bank_transfer' && (
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-xs space-y-2">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-xs space-y-2">
               <div className="flex items-center justify-between border-b border-slate-800/80 pb-2">
                 <span className="text-slate-400">Bank Name:</span>
                 <span className="font-bold text-white">{siteSettings.bankName}</span>
               </div>
-              <div className="flex items-center justify-between border-b border-slate-800/80 pb-2">
+              <div className="flex flex-col xs:flex-row xs:items-center justify-between border-b border-slate-800/80 pb-2 gap-1">
                 <span className="text-slate-400">Account Number:</span>
                 <div className="flex items-center gap-2">
                   <span className="font-mono-numbers font-bold text-cyan-300 text-sm">
@@ -332,7 +333,7 @@ export const QuickOrderModal: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleCopyAccount}
-                    className="p-1 text-slate-400 hover:text-cyan-300 transition-colors cursor-pointer"
+                    className="p-1 text-slate-400 hover:text-cyan-300 transition-colors cursor-pointer min-w-[28px] min-h-[28px] flex items-center justify-center"
                     title="Copy Account Number"
                   >
                     {copiedBank ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -351,11 +352,11 @@ export const QuickOrderModal: React.FC = () => {
           )}
 
           {/* Submit CTA */}
-          <div className="pt-2 flex items-center justify-end gap-3">
+          <div className="pt-2 flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3">
             <button
               type="button"
               onClick={() => setQuickOrderProduct(null)}
-              className="px-4 py-2 text-xs font-medium text-slate-400 hover:text-white transition-colors cursor-pointer"
+              className="px-4 py-2.5 min-h-[44px] sm:min-h-0 text-xs font-medium text-slate-400 hover:text-white transition-colors cursor-pointer flex items-center justify-center"
             >
               Cancel
             </button>
@@ -363,9 +364,9 @@ export const QuickOrderModal: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-2 px-6 py-2.5 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs rounded-xl transition-all shadow-md shadow-cyan-500/10 cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[44px] bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md shadow-cyan-500/10 cursor-pointer disabled:opacity-50"
             >
-              <Zap className="w-4 h-4 fill-slate-950" />
+              <Zap className="w-4 h-4 fill-slate-950 shrink-0" />
               <span>{isSubmitting ? 'Generating Order...' : 'Complete & Receive Order ID'}</span>
             </button>
           </div>

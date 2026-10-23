@@ -92,16 +92,16 @@ export const ProductsPage: React.FC = () => {
         <div className="lg:hidden flex items-center gap-2">
           <button
             onClick={() => setMobileFilterOpen(true)}
-            className="flex-1 inline-flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-200"
+            className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-200 min-h-[44px] cursor-pointer"
           >
             <Filter className="w-4 h-4 text-cyan-400" />
-            <span>Categories ({categories.length})</span>
+            <span>Browse Categories ({categories.length})</span>
           </button>
         </div>
       </div>
 
       {/* Main layout with Left Sidebar + Right Catalog */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
         {/* Left Category Sidebar (Desktop) */}
         <div className="hidden lg:block lg:col-span-3 sticky top-24">
           <CategorySidebar />
@@ -110,7 +110,7 @@ export const ProductsPage: React.FC = () => {
         {/* Right Catalog View */}
         <div className="lg:col-span-9 space-y-6">
           {/* Controls Bar: Search, Category Active Badge, Sort Dropdown */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
             {/* Search within page */}
             <div className="relative w-full sm:w-72">
               <input
@@ -118,13 +118,13 @@ export const ProductsPage: React.FC = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Filter services..."
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-8 pr-7 py-1.5 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-400"
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-8 pr-7 py-2 sm:py-1.5 text-sm sm:text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-400"
               />
-              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white min-w-[24px] min-h-[24px] flex items-center justify-center cursor-pointer"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -132,23 +132,23 @@ export const ProductsPage: React.FC = () => {
             </div>
 
             {/* Right sort selector & active filter clear */}
-            <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+            <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end flex-wrap">
               {activeCategory && (
                 <button
                   onClick={() => setActiveCategory(null)}
-                  className="inline-flex items-center gap-1 text-[11px] text-cyan-400 hover:text-cyan-300 bg-cyan-950/60 border border-cyan-800/40 px-2.5 py-1 rounded-md"
+                  className="inline-flex items-center gap-1 text-[11px] text-cyan-400 hover:text-cyan-300 bg-cyan-950/60 border border-cyan-800/40 px-2.5 py-1.5 rounded-md min-h-[32px] cursor-pointer"
                 >
                   <span>Category: {activeCategory}</span>
                   <X className="w-3 h-3" />
                 </button>
               )}
 
-              <div className="flex items-center gap-1.5">
-                <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
+              <div className="flex items-center gap-1.5 ml-auto sm:ml-0">
+                <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-400 cursor-pointer"
+                  className="bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-2 sm:py-1.5 text-xs text-slate-200 focus:outline-none focus:border-cyan-400 cursor-pointer min-h-[36px] sm:min-h-0"
                 >
                   <option value="featured">Sort: Featured First</option>
                   <option value="price-low">Price: Low to High</option>
@@ -161,7 +161,7 @@ export const ProductsPage: React.FC = () => {
 
           {/* Product Grid */}
           {filteredProducts.length === 0 ? (
-            <div className="p-12 rounded-2xl bg-slate-900/40 border border-slate-800 text-center space-y-3">
+            <div className="p-8 sm:p-12 rounded-2xl bg-slate-900/40 border border-slate-800 text-center space-y-3">
               <ShieldAlert className="w-10 h-10 text-slate-500 mx-auto stroke-1" />
               <h3 className="text-base font-bold text-white">No digital services found</h3>
               <p className="text-xs text-slate-400 max-w-sm mx-auto">
@@ -173,14 +173,14 @@ export const ProductsPage: React.FC = () => {
                     setSearchQuery('');
                     setActiveCategory(null);
                   }}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer"
+                  className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold rounded-lg transition-colors cursor-pointer min-h-[40px]"
                 >
                   Reset All Filters
                 </button>
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
               {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -194,15 +194,16 @@ export const ProductsPage: React.FC = () => {
         <div className="fixed inset-0 z-50 overflow-hidden lg:hidden">
           <div
             onClick={() => setMobileFilterOpen(false)}
-            className="absolute inset-0 bg-slate-950/70 backdrop-blur-xs"
+            className="absolute inset-0 bg-slate-950/70 backdrop-blur-xs transition-opacity"
           />
-          <div className="fixed inset-y-0 left-0 max-w-full flex pr-10">
-            <div className="w-screen max-w-xs bg-slate-900 border-r border-slate-800 p-4 overflow-y-auto">
+          <div className="fixed inset-y-0 left-0 max-w-full flex pr-4 sm:pr-10">
+            <div className="w-screen max-w-xs sm:max-w-sm bg-slate-900 border-r border-slate-800 p-4 overflow-y-auto">
               <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
                 <h3 className="text-sm font-bold text-white">Select Category</h3>
                 <button
                   onClick={() => setMobileFilterOpen(false)}
-                  className="p-1 text-slate-400 hover:text-white"
+                  className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 min-w-[36px] min-h-[36px] flex items-center justify-center cursor-pointer"
+                  aria-label="Close categories"
                 >
                   <X className="w-5 h-5" />
                 </button>

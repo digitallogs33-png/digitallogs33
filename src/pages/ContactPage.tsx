@@ -52,22 +52,22 @@ export const ContactPage: React.FC = () => {
       </div>
 
       {/* Prominent Direct Channels Strip */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         {/* WhatsApp Card */}
         <a
           href={`https://wa.me/${siteSettings.whatsappFormatted}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 hover:border-emerald-400 transition-all group flex items-start gap-4"
+          className="p-4 sm:p-6 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 hover:border-emerald-400 transition-all group flex items-start gap-3.5 sm:gap-4 cursor-pointer"
         >
-          <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:scale-110 transition-transform shrink-0">
-            <MessageCircle className="w-6 h-6" />
+          <div className="p-2.5 sm:p-3 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:scale-110 transition-transform shrink-0">
+            <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1 min-w-0">
             <span className="text-[10px] uppercase tracking-wider text-emerald-400 font-bold">
               Instant Support Desk
             </span>
-            <h3 className="text-base font-bold text-white group-hover:text-emerald-300 transition-colors">
+            <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-emerald-300 transition-colors">
               WhatsApp Messenger
             </h3>
             <p className="text-xs text-emerald-300 font-mono-numbers">
@@ -84,16 +84,16 @@ export const ContactPage: React.FC = () => {
           href={siteSettings.telegramUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-6 rounded-2xl bg-cyan-950/20 border border-cyan-500/30 hover:border-cyan-400 transition-all group flex items-start gap-4"
+          className="p-4 sm:p-6 rounded-2xl bg-cyan-950/20 border border-cyan-500/30 hover:border-cyan-400 transition-all group flex items-start gap-3.5 sm:gap-4 cursor-pointer"
         >
-          <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 group-hover:scale-110 transition-transform shrink-0">
-            <Send className="w-6 h-6" />
+          <div className="p-2.5 sm:p-3 rounded-xl bg-cyan-500/10 text-cyan-400 group-hover:scale-110 transition-transform shrink-0">
+            <Send className="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1 min-w-0">
             <span className="text-[10px] uppercase tracking-wider text-cyan-400 font-bold">
               Official Community
             </span>
-            <h3 className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
+            <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
               Telegram Channel
             </h3>
             <p className="text-xs text-cyan-300">
@@ -106,10 +106,10 @@ export const ContactPage: React.FC = () => {
         </a>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
         {/* Left Column: Interactive Contact Form */}
         <div className="lg:col-span-7">
-          <div className="p-6 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 space-y-6">
+          <div className="p-4 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 space-y-5 sm:space-y-6">
             <h3 className="text-base font-bold text-white">Send Us a Direct Message</h3>
 
             {submitted ? (
@@ -121,13 +121,13 @@ export const ContactPage: React.FC = () => {
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="mt-3 text-xs text-cyan-400 hover:underline cursor-pointer"
+                  className="mt-3 text-xs text-cyan-400 hover:underline cursor-pointer min-h-[36px] py-1"
                 >
                   Send another message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+              <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4 text-xs">
                 <div>
                   <label className="block text-xs font-medium text-slate-400 mb-1">
                     Your Name <span className="text-rose-400">*</span>
@@ -138,11 +138,11 @@ export const ContactPage: React.FC = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Divine Michael"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                   />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <div>
                     <label className="block text-xs font-medium text-slate-400 mb-1">
                       Email Address <span className="text-rose-400">*</span>
@@ -153,7 +153,7 @@ export const ContactPage: React.FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="your.email@example.com"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
+                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                     />
                   </div>
 
@@ -166,7 +166,7 @@ export const ContactPage: React.FC = () => {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="+234 or local phone"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
+                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                     />
                   </div>
                 </div>
@@ -178,7 +178,7 @@ export const ContactPage: React.FC = () => {
                   <select
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-cyan-400"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 focus:outline-none focus:border-cyan-400 cursor-pointer"
                   >
                     <option value="General Inquiry">General Inquiry</option>
                     <option value="VPN Subscription Activation">VPN Subscription Activation</option>
@@ -198,13 +198,13 @@ export const ContactPage: React.FC = () => {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Provide order details, preferred activation method, or specific questions..."
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400 resize-none"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400 resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-2.5 px-4 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs rounded-xl transition-all shadow-md shadow-cyan-500/10 cursor-pointer"
+                  className="w-full min-h-[44px] py-3 px-4 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md shadow-cyan-500/10 cursor-pointer flex items-center justify-center"
                 >
                   Send Inquiry Message
                 </button>

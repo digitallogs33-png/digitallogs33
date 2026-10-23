@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060914" />
+      <stop offset="50%" stop-color="#0D1326" />
+      <stop offset="100%" stop-color="#04060E" />
+    </linearGradient>
+    <radialGradient id="mjGlow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#7928CA" stop-opacity="0.3" />
+      <stop offset="50%" stop-color="#00D2FF" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141B34" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#0A0E1C" stop-opacity="0.95" />
+    </linearGradient>
+    <linearGradient id="mjGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad)" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.06" stroke="#00D2FF" stroke-width="1">
+    <path d="M0 60 H800 M0 120 H800 M0 180 H800 M0 240 H800 M0 300 H800 M0 360 H800 M0 420 H800 M0 480 H800 M0 540 H800" />
+    <path d="M80 0 V600 M160 0 V600 M240 0 V600 M320 0 V600 M400 0 V600 M480 0 V600 M560 0 V600 M640 0 V600 M720 0 V600" />
+  </g>
+
+  <!-- Glow -->
+  <circle cx="400" cy="235" r="280" fill="url(#mjGlow)" />
+
+  <!-- Frame -->
+  <rect x="24" y="24" width="752" height="552" rx="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+  <rect x="25" y="25" width="750" height="550" rx="27" fill="none" stroke="#7928CA" stroke-width="1" opacity="0.25" />
+
+  <!-- Central Card Platform -->
+  <rect x="270" y="105" width="260" height="260" rx="44" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+
+  <!-- Midjourney Official Origami Sailboat Emblem -->
+  <g transform="translate(400, 235)">
+    <!-- Dark Slate Round Badge -->
+    <rect x="-85" y="-85" width="170" height="170" rx="38" fill="url(#mjGrad)" stroke="rgba(121,40,202,0.4)" stroke-width="2" />
+    
+    <!-- Midjourney Sailboat Origami Vector -->
+    <g fill="#FFFFFF">
+      <!-- Main Sail (curved triangular sail) -->
+      <path d="M-6 -46 L-6 16 C-6 16 28 8 28 -28 Z" opacity="0.95" />
+      <!-- Left smaller Jib sail -->
+      <path d="M-12 -28 L-12 16 C-12 16 -34 16 -34 6 Z" opacity="0.8" />
+      <!-- Boat hull / base keel -->
+      <path d="M-42 22 L42 22 C36 38 -28 38 -42 22 Z" />
+      <!-- Water ripple curve underneath -->
+      <path d="M-48 44 C-20 40 20 48 48 44" stroke="#00D2FF" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7" />
+    </g>
+  </g>
+
+  <!-- Title & Details -->
+  <g transform="translate(400, 420)" text-anchor="middle">
+    <!-- Category pill -->
+    <rect x="-115" y="-32" width="230" height="28" rx="14" fill="rgba(121,40,202,0.12)" stroke="rgba(121,40,202,0.4)" stroke-width="1" />
+    <text x="0" y="-14" fill="#A855F7" font-family="system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">GENERATIVE ART AI</text>
+    
+    <!-- Title -->
+    <text x="0" y="32" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="28" font-weight="800" letter-spacing="-0.5">Midjourney Pro Subscription</text>
+    <text x="0" y="62" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="15" font-weight="500">v6 Photorealism • Unlimited Relax Hours • Stealth Mode</text>
+  </g>
+
+  <!-- Feature Pills -->
+  <g transform="translate(180, 520)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="18" cy="17" r="4" fill="#A855F7" />
+    <text x="30" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">v6 Quality</text>
+
+    <!-- Pill 2 -->
+    <rect x="155" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="173" cy="17" r="4" fill="#00D2FF" />
+    <text x="185" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Stealth Mode</text>
+
+    <!-- Pill 3 -->
+    <rect x="310" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="328" cy="17" r="4" fill="#10B981" />
+    <text x="340" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Fast Relax</text>
+  </g>
+</svg>

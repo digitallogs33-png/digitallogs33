@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040C0A" />
+      <stop offset="50%" stop-color="#081A14" />
+      <stop offset="100%" stop-color="#020806" />
+    </linearGradient>
+    <radialGradient id="piaGlow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.25" />
+      <stop offset="50%" stop-color="#059669" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0C261C" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#061710" stop-opacity="0.95" />
+    </linearGradient>
+    <linearGradient id="piaGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22C55E" />
+      <stop offset="100%" stop-color="#15803D" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad)" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.06" stroke="#10B981" stroke-width="1">
+    <path d="M0 60 H800 M0 120 H800 M0 180 H800 M0 240 H800 M0 300 H800 M0 360 H800 M0 420 H800 M0 480 H800 M0 540 H800" />
+    <path d="M80 0 V600 M160 0 V600 M240 0 V600 M320 0 V600 M400 0 V600 M480 0 V600 M560 0 V600 M640 0 V600 M720 0 V600" />
+  </g>
+
+  <!-- Glow -->
+  <circle cx="400" cy="235" r="280" fill="url(#piaGlow)" />
+
+  <!-- Frame -->
+  <rect x="24" y="24" width="752" height="552" rx="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+  <rect x="25" y="25" width="750" height="550" rx="27" fill="none" stroke="#10B981" stroke-width="1" opacity="0.25" />
+
+  <!-- Central Card Platform -->
+  <rect x="270" y="105" width="260" height="260" rx="44" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+
+  <!-- PIA Green Shield Emblem -->
+  <g transform="translate(400, 235)">
+    <!-- Shield Outline / Body -->
+    <path d="M0 -75 L68 -48 V8 C68 48 38 78 0 92 C-38 78 -68 48 -68 8 V-48 Z" fill="url(#piaGreen)" />
+    <!-- Inner subtle contour -->
+    <path d="M0 -65 L58 -42 V8 C58 42 32 68 0 80 C-32 68 -58 42 -58 8 V-42 Z" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2" />
+
+    <!-- Robot / Shield Eye & Facial Glyphs -->
+    <!-- Two circles for robot eyes -->
+    <circle cx="-22" cy="-8" r="11" fill="#FFFFFF" />
+    <circle cx="22" cy="-8" r="11" fill="#FFFFFF" />
+    <!-- Pupils -->
+    <circle cx="-22" cy="-8" r="5" fill="#15803D" />
+    <circle cx="22" cy="-8" r="5" fill="#15803D" />
+    <!-- Friendly smile curve -->
+    <path d="M-18 20 C-10 32 10 32 18 20" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" fill="none" />
+    <!-- Antennas / Shield top accent -->
+    <rect x="-10" y="-52" width="20" height="4" rx="2" fill="#FFFFFF" opacity="0.8" />
+  </g>
+
+  <!-- Title & Details -->
+  <g transform="translate(400, 420)" text-anchor="middle">
+    <!-- Category pill -->
+    <rect x="-130" y="-32" width="260" height="28" rx="14" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.4)" stroke-width="1" />
+    <text x="0" y="-14" fill="#10B981" font-family="system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">OPEN-SOURCE VPN</text>
+    
+    <!-- Title -->
+    <text x="0" y="32" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="28" font-weight="800" letter-spacing="-0.5">Private Internet Access (PIA)</text>
+    <text x="0" y="62" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="15" font-weight="500">100% Open Source • Proven No-Logs • WireGuard</text>
+  </g>
+
+  <!-- Feature Pills -->
+  <g transform="translate(180, 520)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="18" cy="17" r="4" fill="#10B981" />
+    <text x="30" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Open Source</text>
+
+    <!-- Pill 2 -->
+    <rect x="155" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="173" cy="17" r="4" fill="#00D2FF" />
+    <text x="185" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Court-Proven</text>
+
+    <!-- Pill 3 -->
+    <rect x="310" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="328" cy="17" r="4" fill="#3B82F6" />
+    <text x="340" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Port Forward</text>
+  </g>
+</svg>

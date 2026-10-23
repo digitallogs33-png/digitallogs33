@@ -59,7 +59,7 @@ export const AdminPage: React.FC = () => {
     priceNGN: 4000,
     duration: '30 Days',
     inStock: true,
-    image: '/src/assets/images/product_vpn_privacy_1792747623587.jpg',
+    image: '/images/vpn/expressvpn.svg',
     licenseType: 'Official License Voucher',
     deliveryMethod: 'Instant Digital Key Dispatch',
     features: ['24/7 Access', 'Zero Logs', 'Cross-Platform Compatibility']
@@ -166,7 +166,7 @@ export const AdminPage: React.FC = () => {
         priceNGN: Number(productForm.priceNGN) || 1500,
         duration: productForm.duration || '30 Days',
         inStock: productForm.inStock ?? true,
-        image: productForm.image || '/src/assets/images/product_vpn_privacy_1792747623587.jpg',
+        image: productForm.image || '/images/vpn/expressvpn.svg',
         licenseType: productForm.licenseType || 'Commercial Voucher',
         deliveryMethod: productForm.deliveryMethod || 'Digital Dispatch',
         features: productForm.features || ['Instant Setup']
@@ -232,10 +232,10 @@ export const AdminPage: React.FC = () => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="flex flex-wrap items-center gap-1.5 border-b border-slate-800 pb-2 text-xs font-semibold">
+      <div className="flex items-center gap-1.5 border-b border-slate-800 pb-2 text-xs font-semibold overflow-x-auto no-scrollbar whitespace-nowrap">
         <button
           onClick={() => setActiveTab('overview')}
-          className={`px-4 py-2 rounded-lg transition-colors cursor-pointer ${
+          className={`px-3.5 sm:px-4 py-2 min-h-[38px] rounded-lg transition-colors cursor-pointer shrink-0 ${
             activeTab === 'overview'
               ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold'
               : 'text-slate-400 hover:text-white'
@@ -245,7 +245,7 @@ export const AdminPage: React.FC = () => {
         </button>
         <button
           onClick={() => setActiveTab('orders')}
-          className={`px-4 py-2 rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 ${
+          className={`px-3.5 sm:px-4 py-2 min-h-[38px] rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 shrink-0 ${
             activeTab === 'orders'
               ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold'
               : 'text-slate-400 hover:text-white'
@@ -260,7 +260,7 @@ export const AdminPage: React.FC = () => {
         </button>
         <button
           onClick={() => setActiveTab('products')}
-          className={`px-4 py-2 rounded-lg transition-colors cursor-pointer ${
+          className={`px-3.5 sm:px-4 py-2 min-h-[38px] rounded-lg transition-colors cursor-pointer shrink-0 ${
             activeTab === 'products'
               ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold'
               : 'text-slate-400 hover:text-white'
@@ -270,7 +270,7 @@ export const AdminPage: React.FC = () => {
         </button>
         <button
           onClick={() => setActiveTab('categories')}
-          className={`px-4 py-2 rounded-lg transition-colors cursor-pointer ${
+          className={`px-3.5 sm:px-4 py-2 min-h-[38px] rounded-lg transition-colors cursor-pointer shrink-0 ${
             activeTab === 'categories'
               ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold'
               : 'text-slate-400 hover:text-white'
@@ -280,7 +280,7 @@ export const AdminPage: React.FC = () => {
         </button>
         <button
           onClick={() => setActiveTab('settings')}
-          className={`px-4 py-2 rounded-lg transition-colors cursor-pointer ${
+          className={`px-3.5 sm:px-4 py-2 min-h-[38px] rounded-lg transition-colors cursor-pointer shrink-0 ${
             activeTab === 'settings'
               ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold'
               : 'text-slate-400 hover:text-white'
@@ -377,7 +377,7 @@ export const AdminPage: React.FC = () => {
 
           {/* Orders Table */}
           <div className="rounded-xl border border-slate-800 bg-slate-900 overflow-hidden overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs min-w-[700px]">
               <thead className="bg-slate-950 border-b border-slate-800 text-slate-400 text-[11px] uppercase tracking-wider font-semibold">
                 <tr>
                   <th className="p-3">Order ID</th>
@@ -478,7 +478,7 @@ export const AdminPage: React.FC = () => {
                   priceNGN: 4000,
                   duration: '30 Days',
                   inStock: true,
-                  image: '/src/assets/images/product_vpn_privacy_1792747623587.jpg',
+                  image: '/images/vpn/expressvpn.svg',
                   licenseType: 'Authorized License Voucher',
                   deliveryMethod: 'Instant Digital Key Dispatch',
                   features: ['Official Voucher', 'Zero-Log Protection', 'Fast Support']

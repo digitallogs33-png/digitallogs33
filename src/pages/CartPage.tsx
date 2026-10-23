@@ -73,19 +73,19 @@ export const CartPage: React.FC = () => {
           {cart.map((item, idx) => (
             <div
               key={`${item.productId}-${item.packageId || 'def'}-${idx}`}
-              className="p-4 sm:p-5 rounded-2xl bg-slate-900/70 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+              className="p-3.5 sm:p-5 rounded-2xl bg-slate-900/70 border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4"
             >
-              <div className="flex items-center gap-4 min-w-0">
+              <div className="flex items-center gap-3 sm:gap-4 min-w-0 w-full sm:w-auto">
                 <img
                   src={item.productImage}
                   alt={item.productTitle}
-                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover bg-slate-950 border border-slate-800 shrink-0"
+                  className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl object-cover bg-slate-950 border border-slate-800 shrink-0"
                 />
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <span className="text-[10px] uppercase tracking-wider text-cyan-400 font-bold">
                     {item.category}
                   </span>
-                  <h3 className="text-sm font-bold text-white truncate max-w-sm sm:max-w-md">
+                  <h3 className="text-sm font-bold text-white truncate max-w-xs sm:max-w-md">
                     {item.productTitle}
                   </h3>
                   {item.packageName && (
@@ -100,11 +100,12 @@ export const CartPage: React.FC = () => {
               </div>
 
               {/* Quantity and Price */}
-              <div className="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-0 border-slate-800">
+              <div className="flex items-center justify-between sm:justify-end gap-4 sm:gap-6 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-0 border-slate-800">
                 <div className="flex items-center border border-slate-800 rounded-lg bg-slate-950">
                   <button
                     onClick={() => updateQuantity(idx, item.quantity - 1)}
-                    className="p-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer"
+                    className="p-2 sm:p-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer min-w-[32px] min-h-[32px] flex items-center justify-center"
+                    aria-label="Decrease quantity"
                   >
                     <Minus className="w-3.5 h-3.5" />
                   </button>
@@ -113,7 +114,8 @@ export const CartPage: React.FC = () => {
                   </span>
                   <button
                     onClick={() => updateQuantity(idx, item.quantity + 1)}
-                    className="p-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer"
+                    className="p-2 sm:p-1.5 text-slate-400 hover:text-white transition-colors cursor-pointer min-w-[32px] min-h-[32px] flex items-center justify-center"
+                    aria-label="Increase quantity"
                   >
                     <Plus className="w-3.5 h-3.5" />
                   </button>
@@ -128,8 +130,9 @@ export const CartPage: React.FC = () => {
 
                 <button
                   onClick={() => removeFromCart(idx)}
-                  className="p-2 text-slate-500 hover:text-rose-400 transition-colors cursor-pointer rounded-lg hover:bg-slate-800"
+                  className="p-2 text-slate-500 hover:text-rose-400 transition-colors cursor-pointer rounded-lg hover:bg-slate-800 min-w-[36px] min-h-[36px] flex items-center justify-center"
                   title="Remove"
+                  aria-label="Remove item"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -140,7 +143,7 @@ export const CartPage: React.FC = () => {
 
         {/* Order Summary Column */}
         <div className="lg:col-span-4 space-y-4">
-          <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-5">
+          <div className="p-4 sm:p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 sm:space-y-5">
             <h3 className="text-sm font-bold text-white uppercase tracking-wider">
               Order Summary
             </h3>
@@ -170,7 +173,7 @@ export const CartPage: React.FC = () => {
 
             <button
               onClick={() => navigateTo('checkout')}
-              className="w-full py-3 px-4 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md shadow-cyan-500/10 flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full min-h-[44px] py-3 px-4 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md shadow-cyan-500/10 flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Proceed to Checkout</span>
               <ArrowRight className="w-4 h-4" />

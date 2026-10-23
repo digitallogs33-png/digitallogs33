@@ -133,13 +133,13 @@ export const OrderConfirmationPage: React.FC = () => {
                 </span>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+              <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2.5">
                 <div className="flex items-center justify-between text-slate-400">
                   <span>Bank Name:</span>
                   <strong className="text-white font-semibold">{siteSettings.bankName}</strong>
                 </div>
 
-                <div className="flex items-center justify-between border-t border-slate-800/80 pt-2">
+                <div className="flex flex-col xs:flex-row xs:items-center justify-between border-t border-slate-800/80 pt-2 gap-1">
                   <span className="text-slate-400">Account Number:</span>
                   <div className="flex items-center gap-2">
                     <span className="text-base font-bold text-white font-mono-numbers tracking-wider">
@@ -147,7 +147,7 @@ export const OrderConfirmationPage: React.FC = () => {
                     </span>
                     <button
                       onClick={handleCopyAccount}
-                      className="p-1 text-slate-400 hover:text-cyan-400 transition-colors cursor-pointer"
+                      className="p-1 text-slate-400 hover:text-cyan-400 transition-colors cursor-pointer min-w-[28px] min-h-[28px] flex items-center justify-center"
                       title="Copy Account Number"
                     >
                       {copiedAccount ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -176,9 +176,9 @@ export const OrderConfirmationPage: React.FC = () => {
           </div>
 
           {/* Payment Proof Submission Form */}
-          <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+          <div className="p-4 sm:p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
             <div className="flex items-center gap-2 text-white font-bold text-sm border-b border-slate-800 pb-3">
-              <FileText className="w-4 h-4 text-cyan-400" />
+              <FileText className="w-4 h-4 text-cyan-400 shrink-0" />
               <span>Submit Payment Proof / Transaction Reference</span>
             </div>
 
@@ -204,7 +204,7 @@ export const OrderConfirmationPage: React.FC = () => {
                     value={transferRef}
                     onChange={(e) => setTransferRef(e.target.value)}
                     placeholder="e.g. 000013261023789456 or reference code"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
+                    className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                   />
                 </div>
 
@@ -218,7 +218,7 @@ export const OrderConfirmationPage: React.FC = () => {
                       value={senderBank}
                       onChange={(e) => setSenderBank(e.target.value)}
                       placeholder="e.g. GTBank, Kuda, Zenith"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
+                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                     />
                   </div>
                   <div>
@@ -230,14 +230,14 @@ export const OrderConfirmationPage: React.FC = () => {
                       value={proofNotes}
                       onChange={(e) => setProofNotes(e.target.value)}
                       placeholder="Name on debit account"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
+                      className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                     />
                   </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-2.5 px-4 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer border border-slate-700 mt-2"
+                  className="w-full py-3 px-4 min-h-[44px] bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer border border-slate-700 mt-2 flex items-center justify-center"
                 >
                   Submit Payment Details
                 </button>

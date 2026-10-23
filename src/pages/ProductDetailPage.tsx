@@ -117,10 +117,11 @@ export const ProductDetailPage: React.FC = () => {
           </div>
 
           {/* Quick Security & Trust Callouts below Image */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+          {/* Quick Security & Trust Callouts below Image */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="p-3 sm:p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
               <div className="flex items-center gap-2 text-slate-200 font-bold mb-1">
-                <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                <ShieldCheck className="w-4 h-4 text-cyan-400 shrink-0" />
                 <span>Zero Password Policy</span>
               </div>
               <p className="text-[11px] text-slate-400">
@@ -128,9 +129,9 @@ export const ProductDetailPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
+            <div className="p-3 sm:p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 text-xs">
               <div className="flex items-center gap-2 text-slate-200 font-bold mb-1">
-                <Clock className="w-4 h-4 text-emerald-400" />
+                <Clock className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>Fast Voucher Dispatch</span>
               </div>
               <p className="text-[11px] text-slate-400">
@@ -142,7 +143,7 @@ export const ProductDetailPage: React.FC = () => {
 
         {/* Right Column: Contiguous Purchase Module */}
         <div className="lg:col-span-6 space-y-6">
-          <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-6">
+          <div className="p-4 sm:p-8 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-5 sm:space-y-6">
             {/* Title & Metadata */}
             <div>
               <div className="flex items-center gap-2 text-xs text-cyan-400 font-semibold mb-2">
@@ -151,11 +152,11 @@ export const ProductDetailPage: React.FC = () => {
                 <span>{product.duration || 'Fast Digital Delivery'}</span>
               </div>
 
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
+              <h1 className="text-xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
                 {product.title}
               </h1>
 
-              <p className="text-xs sm:text-sm text-slate-300 mt-3 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 mt-2.5 sm:mt-3 leading-relaxed">
                 {product.shortDescription}
               </p>
             </div>
@@ -227,31 +228,31 @@ export const ProductDetailPage: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
               <button
                 onClick={handleOrderNow}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md shadow-cyan-500/10 cursor-pointer"
+                className="w-full min-h-[44px] flex items-center justify-center gap-2 py-3 px-4 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md shadow-cyan-500/10 cursor-pointer"
               >
-                <Zap className="w-4 h-4 fill-slate-950" />
+                <Zap className="w-4 h-4 fill-slate-950 shrink-0" />
                 <span>Instant Order Now</span>
               </button>
 
               <button
                 onClick={handleAddToCart}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs sm:text-sm rounded-xl transition-all border border-slate-700 cursor-pointer"
+                className="w-full min-h-[44px] flex items-center justify-center gap-2 py-3 px-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs sm:text-sm rounded-xl transition-all border border-slate-700 cursor-pointer"
               >
-                <ShoppingCart className="w-4 h-4" />
+                <ShoppingCart className="w-4 h-4 shrink-0" />
                 <span>Add to Shopping Cart</span>
               </button>
             </div>
 
             {/* Bank Transfer Instructions Preview */}
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-xs space-y-2">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/80 border border-slate-800 text-xs space-y-2">
               <div className="flex items-center justify-between font-semibold text-slate-300 pb-1 border-b border-slate-800">
                 <div className="flex items-center gap-1.5">
-                  <Building2 className="w-4 h-4 text-cyan-400" />
+                  <Building2 className="w-4 h-4 text-cyan-400 shrink-0" />
                   <span>Payrep MFB Transfer Details</span>
                 </div>
                 <button
                   onClick={handleCopyAccount}
-                  className="text-cyan-400 hover:underline inline-flex items-center gap-1 cursor-pointer"
+                  className="text-cyan-400 hover:underline inline-flex items-center gap-1 cursor-pointer min-h-[28px] py-0.5"
                 >
                   {copiedBank ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedBank ? 'Copied' : 'Copy Acc'}</span>
@@ -269,11 +270,11 @@ export const ProductDetailPage: React.FC = () => {
       </div>
 
       {/* Tabs Section: Full Description, Deliverables, Support & FAQs */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-6">
-        <div className="flex items-center gap-2 border-b border-slate-800 pb-3">
+      <div className="p-4 sm:p-8 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-5 sm:space-y-6">
+        <div className="flex items-center gap-2 border-b border-slate-800 pb-3 overflow-x-auto no-scrollbar whitespace-nowrap">
           <button
             onClick={() => setActiveTab('details')}
-            className={`px-4 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
+            className={`px-3.5 sm:px-4 py-2 min-h-[40px] text-xs font-bold rounded-lg transition-colors cursor-pointer shrink-0 ${
               activeTab === 'details'
                 ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30'
                 : 'text-slate-400 hover:text-white'
@@ -283,7 +284,7 @@ export const ProductDetailPage: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveTab('terms')}
-            className={`px-4 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
+            className={`px-3.5 sm:px-4 py-2 min-h-[40px] text-xs font-bold rounded-lg transition-colors cursor-pointer shrink-0 ${
               activeTab === 'terms'
                 ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30'
                 : 'text-slate-400 hover:text-white'
@@ -293,7 +294,7 @@ export const ProductDetailPage: React.FC = () => {
           </button>
           <button
             onClick={() => setActiveTab('support')}
-            className={`px-4 py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
+            className={`px-3.5 sm:px-4 py-2 min-h-[40px] text-xs font-bold rounded-lg transition-colors cursor-pointer shrink-0 ${
               activeTab === 'support'
                 ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30'
                 : 'text-slate-400 hover:text-white'

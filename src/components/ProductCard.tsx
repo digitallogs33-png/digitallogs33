@@ -99,29 +99,31 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         {/* Price & Action Row */}
-        <div className="pt-3 border-t border-slate-800/80 flex items-end justify-between gap-2 mt-auto">
-          <div>
+        <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2 mt-auto">
+          <div className="min-w-0 flex-1">
             <span className="block text-[10px] uppercase tracking-wider text-slate-500 font-medium">
               {hasPackages ? 'Starting at' : 'Price'}
             </span>
-            <div className="text-base font-bold text-white font-mono-numbers">
+            <div className="text-base font-bold text-white font-mono-numbers truncate">
               {formatPrice(product.priceNGN)}
             </div>
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 shrink-0">
             <button
               onClick={handleQuickAdd}
               title="Add to cart"
-              className="p-2 text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors cursor-pointer border border-slate-700/60"
+              aria-label={`Add ${product.title} to cart`}
+              className="p-2 sm:p-2 min-w-[38px] min-h-[38px] flex items-center justify-center text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-750 rounded-lg transition-colors cursor-pointer border border-slate-700/60"
             >
               <ShoppingCart className="w-4 h-4" />
             </button>
 
             <button
               onClick={handleOrderNow}
-              className="inline-flex items-center gap-1 px-3 py-2 text-xs font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-colors cursor-pointer whitespace-nowrap shadow-sm shadow-cyan-500/10"
+              aria-label={`Order ${product.title} now`}
+              className="inline-flex items-center justify-center gap-1 px-3 py-2 min-h-[38px] text-xs font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-colors cursor-pointer whitespace-nowrap shadow-sm shadow-cyan-500/10"
             >
               <Zap className="w-3.5 h-3.5 fill-current" />
               <span>Order Now</span>

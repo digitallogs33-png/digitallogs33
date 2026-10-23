@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080C16" />
+      <stop offset="50%" stop-color="#0E172A" />
+      <stop offset="100%" stop-color="#060911" />
+    </linearGradient>
+    <radialGradient id="cyanGlow" cx="40%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#00F2FE" stop-opacity="0.25" />
+      <stop offset="60%" stop-color="#00F2FE" stop-opacity="0.03" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="pinkGlow" cx="65%" cy="55%" r="50%">
+      <stop offset="0%" stop-color="#FE2C55" stop-opacity="0.25" />
+      <stop offset="60%" stop-color="#FE2C55" stop-opacity="0.03" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#162035" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#0D1524" stop-opacity="0.9" />
+    </linearGradient>
+    <linearGradient id="badgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F2FE" />
+      <stop offset="100%" stop-color="#FE2C55" />
+    </linearGradient>
+    <filter id="neonGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad)" />
+
+  <!-- Grid Pattern overlay -->
+  <g opacity="0.07" stroke="#00D2FF" stroke-width="1">
+    <path d="M0 60 H800 M0 120 H800 M0 180 H800 M0 240 H800 M0 300 H800 M0 360 H800 M0 420 H800 M0 480 H800 M0 540 H800" />
+    <path d="M80 0 V600 M160 0 V600 M240 0 V600 M320 0 V600 M400 0 V600 M480 0 V600 M560 0 V600 M640 0 V600 M720 0 V600" />
+  </g>
+
+  <!-- Ambient Glows -->
+  <circle cx="340" cy="260" r="280" fill="url(#cyanGlow)" />
+  <circle cx="480" cy="320" r="280" fill="url(#pinkGlow)" />
+
+  <!-- Outer Border Frame -->
+  <rect x="24" y="24" width="752" height="552" rx="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+  <rect x="25" y="25" width="750" height="550" rx="27" fill="none" stroke="url(#badgeGrad)" stroke-width="1" opacity="0.25" />
+
+  <!-- Central Card Platform -->
+  <rect x="270" y="105" width="260" height="260" rx="44" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+  <circle cx="400" cy="235" r="105" fill="#090D16" />
+
+  <!-- TikTok Chromatic Music Note Emblem -->
+  <!-- Cyan offset shadow -->
+  <g transform="translate(378, 150) scale(1.15)">
+    <!-- Cyan Layer -->
+    <path d="M52 0 H33 C33 46 0 46 0 46 V69 C19.5 69 33 60 33 60 V106 C33 131 16 146 -4 146 C-24 146 -40 130 -40 109 C-40 88 -24 72 -4 72 C2.5 72 8.7 73.8 14 77.2 V51.5 C7.8 49.3 1.2 48.2 -4 48.2 C-38 48.2 -64 75 -64 109 C-64 143 -37 170 -4 170 C30 170 57 143 57 106 V49 C69 57.5 83 62.5 98 63 V40 C84 39.5 69 29.5 52 0 Z" fill="#25F4EE" opacity="0.9" transform="translate(-4, -2)" />
+    <!-- Pink Layer -->
+    <path d="M52 0 H33 C33 46 0 46 0 46 V69 C19.5 69 33 60 33 60 V106 C33 131 16 146 -4 146 C-24 146 -40 130 -40 109 C-40 88 -24 72 -4 72 C2.5 72 8.7 73.8 14 77.2 V51.5 C7.8 49.3 1.2 48.2 -4 48.2 C-38 48.2 -64 75 -64 109 C-64 143 -37 170 -4 170 C30 170 57 143 57 106 V49 C69 57.5 83 62.5 98 63 V40 C84 39.5 69 29.5 52 0 Z" fill="#FE2C55" opacity="0.9" transform="translate(4, 2)" />
+    <!-- White Main Layer -->
+    <path d="M52 0 H33 C33 46 0 46 0 46 V69 C19.5 69 33 60 33 60 V106 C33 131 16 146 -4 146 C-24 146 -40 130 -40 109 C-40 88 -24 72 -4 72 C2.5 72 8.7 73.8 14 77.2 V51.5 C7.8 49.3 1.2 48.2 -4 48.2 C-38 48.2 -64 75 -64 109 C-64 143 -37 170 -4 170 C30 170 57 143 57 106 V49 C69 57.5 83 62.5 98 63 V40 C84 39.5 69 29.5 52 0 Z" fill="#FFFFFF" />
+  </g>
+
+  <!-- Title & Category Badges -->
+  <g transform="translate(400, 420)" text-anchor="middle">
+    <!-- Category pill -->
+    <rect x="-115" y="-32" width="230" height="28" rx="14" fill="rgba(254,44,85,0.12)" stroke="rgba(254,44,85,0.4)" stroke-width="1" />
+    <text x="0" y="-14" fill="#FE2C55" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">TIKTOK MARKETING</text>
+    
+    <!-- Title -->
+    <text x="0" y="32" fill="#FFFFFF" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800" letter-spacing="-0.5">TikTok Growth &amp; Engagement</text>
+    <text x="0" y="62" fill="#94A3B8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="500">Real Followers • Likes • Viral Views • Shares</text>
+  </g>
+
+  <!-- Feature Pills -->
+  <g transform="translate(180, 520)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="18" cy="17" r="4" fill="#25F4EE" />
+    <text x="30" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Instant Start</text>
+
+    <!-- Pill 2 -->
+    <rect x="155" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="173" cy="17" r="4" fill="#FE2C55" />
+    <text x="185" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">High Retention</text>
+
+    <!-- Pill 3 -->
+    <rect x="310" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="328" cy="17" r="4" fill="#10B981" />
+    <text x="340" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">30-Day Refill</text>
+  </g>
+</svg>

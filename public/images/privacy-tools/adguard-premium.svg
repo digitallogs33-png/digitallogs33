@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050C0A" />
+      <stop offset="50%" stop-color="#091A14" />
+      <stop offset="100%" stop-color="#030806" />
+    </linearGradient>
+    <radialGradient id="adgGlow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#67B279" stop-opacity="0.3" />
+      <stop offset="50%" stop-color="#4E9A51" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0D261C" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#071710" stop-opacity="0.95" />
+    </linearGradient>
+    <linearGradient id="adgGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#67B279" />
+      <stop offset="100%" stop-color="#469956" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad)" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.06" stroke="#67B279" stroke-width="1">
+    <path d="M0 60 H800 M0 120 H800 M0 180 H800 M0 240 H800 M0 300 H800 M0 360 H800 M0 420 H800 M0 480 H800 M0 540 H800" />
+    <path d="M80 0 V600 M160 0 V600 M240 0 V600 M320 0 V600 M400 0 V600 M480 0 V600 M560 0 V600 M640 0 V600 M720 0 V600" />
+  </g>
+
+  <!-- Glow -->
+  <circle cx="400" cy="235" r="280" fill="url(#adgGlow)" />
+
+  <!-- Frame -->
+  <rect x="24" y="24" width="752" height="552" rx="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+  <rect x="25" y="25" width="750" height="550" rx="27" fill="none" stroke="#67B279" stroke-width="1" opacity="0.25" />
+
+  <!-- Central Card Platform -->
+  <rect x="270" y="105" width="260" height="260" rx="44" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+
+  <!-- AdGuard Official Shield & Checkmark Emblem -->
+  <g transform="translate(400, 235)">
+    <!-- AdGuard Shield Contour -->
+    <path d="M0 -78 C35 -78 68 -66 68 -32 C68 28 40 68 0 88 C-40 68 -68 28 -68 -32 C-68 -66 -35 -78 0 -78 Z" fill="url(#adgGreen)" />
+    <!-- Inner soft shield glow -->
+    <path d="M0 -68 C28 -68 56 -56 56 -28 C56 22 34 56 0 74 C-34 56 -56 22 -56 -28 C-56 -56 -28 -68 0 -68 Z" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2" />
+
+    <!-- Sharp Bold AdGuard Checkmark -->
+    <path d="M-28 -4 L-8 18 L34 -28" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- Title & Details -->
+  <g transform="translate(400, 420)" text-anchor="middle">
+    <!-- Category pill -->
+    <rect x="-115" y="-32" width="230" height="28" rx="14" fill="rgba(103,178,121,0.12)" stroke="rgba(103,178,121,0.4)" stroke-width="1" />
+    <text x="0" y="-14" fill="#67B279" font-family="system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">ADBLOCKING &amp; PRIVACY</text>
+    
+    <!-- Title -->
+    <text x="0" y="32" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="28" font-weight="800" letter-spacing="-0.5">AdGuard Premium Lifetime</text>
+    <text x="0" y="62" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="15" font-weight="500">System-Wide Adblock • Tracking Protection • DNS Filtering</text>
+  </g>
+
+  <!-- Feature Pills -->
+  <g transform="translate(180, 520)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="18" cy="17" r="4" fill="#67B279" />
+    <text x="30" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Zero Ads</text>
+
+    <!-- Pill 2 -->
+    <rect x="155" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="173" cy="17" r="4" fill="#00D2FF" />
+    <text x="185" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Anti-Tracker</text>
+
+    <!-- Pill 3 -->
+    <rect x="310" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="328" cy="17" r="4" fill="#10B981" />
+    <text x="340" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">9 Devices</text>
+  </g>
+</svg>

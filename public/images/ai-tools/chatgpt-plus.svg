@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040D0B" />
+      <stop offset="50%" stop-color="#081C17" />
+      <stop offset="100%" stop-color="#020807" />
+    </linearGradient>
+    <radialGradient id="gptGlow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#10A37F" stop-opacity="0.3" />
+      <stop offset="50%" stop-color="#00D2FF" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0E2822" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#071915" stop-opacity="0.95" />
+    </linearGradient>
+    <linearGradient id="gptGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10A37F" />
+      <stop offset="100%" stop-color="#0E8C6D" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad)" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.06" stroke="#10A37F" stroke-width="1">
+    <path d="M0 60 H800 M0 120 H800 M0 180 H800 M0 240 H800 M0 300 H800 M0 360 H800 M0 420 H800 M0 480 H800 M0 540 H800" />
+    <path d="M80 0 V600 M160 0 V600 M240 0 V600 M320 0 V600 M400 0 V600 M480 0 V600 M560 0 V600 M640 0 V600 M720 0 V600" />
+  </g>
+
+  <!-- Glow -->
+  <circle cx="400" cy="235" r="280" fill="url(#gptGlow)" />
+
+  <!-- Frame -->
+  <rect x="24" y="24" width="752" height="552" rx="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+  <rect x="25" y="25" width="750" height="550" rx="27" fill="none" stroke="#10A37F" stroke-width="1" opacity="0.25" />
+
+  <!-- Central Card Platform -->
+  <rect x="270" y="105" width="260" height="260" rx="44" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+
+  <!-- OpenAI ChatGPT Rosette Emblem -->
+  <g transform="translate(400, 235)">
+    <!-- Plate -->
+    <rect x="-85" y="-85" width="170" height="170" rx="38" fill="url(#gptGreen)" />
+    <!-- Inner ring -->
+    <rect x="-75" y="-75" width="150" height="150" rx="30" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
+
+    <!-- OpenAI Knot / Rosette Path -->
+    <g transform="scale(1.2)" stroke="#FFFFFF" stroke-width="6.5" fill="none" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M0 -42 C12 -42 22 -36 28 -26 L28 -6 C28 2 24 9 17 13 L-12 30 C-18 33 -26 31 -30 25 C-33 19 -31 11 -25 7 L-4 -5 L-4 -26 C-4 -35 -1 -42 0 -42 Z" transform="rotate(0)" />
+      <path d="M0 -42 C12 -42 22 -36 28 -26 L28 -6 C28 2 24 9 17 13 L-12 30 C-18 33 -26 31 -30 25 C-33 19 -31 11 -25 7 L-4 -5 L-4 -26 C-4 -35 -1 -42 0 -42 Z" transform="rotate(60)" />
+      <path d="M0 -42 C12 -42 22 -36 28 -26 L28 -6 C28 2 24 9 17 13 L-12 30 C-18 33 -26 31 -30 25 C-33 19 -31 11 -25 7 L-4 -5 L-4 -26 C-4 -35 -1 -42 0 -42 Z" transform="rotate(120)" />
+      <path d="M0 -42 C12 -42 22 -36 28 -26 L28 -6 C28 2 24 9 17 13 L-12 30 C-18 33 -26 31 -30 25 C-33 19 -31 11 -25 7 L-4 -5 L-4 -26 C-4 -35 -1 -42 0 -42 Z" transform="rotate(180)" />
+      <path d="M0 -42 C12 -42 22 -36 28 -26 L28 -6 C28 2 24 9 17 13 L-12 30 C-18 33 -26 31 -30 25 C-33 19 -31 11 -25 7 L-4 -5 L-4 -26 C-4 -35 -1 -42 0 -42 Z" transform="rotate(240)" />
+      <path d="M0 -42 C12 -42 22 -36 28 -26 L28 -6 C28 2 24 9 17 13 L-12 30 C-18 33 -26 31 -30 25 C-33 19 -31 11 -25 7 L-4 -5 L-4 -26 C-4 -35 -1 -42 0 -42 Z" transform="rotate(300)" />
+    </g>
+  </g>
+
+  <!-- Title & Details -->
+  <g transform="translate(400, 420)" text-anchor="middle">
+    <!-- Category pill -->
+    <rect x="-105" y="-32" width="210" height="28" rx="14" fill="rgba(16,163,127,0.12)" stroke="rgba(16,163,127,0.4)" stroke-width="1" />
+    <text x="0" y="-14" fill="#10A37F" font-family="system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">ARTIFICIAL INTELLIGENCE</text>
+    
+    <!-- Title -->
+    <text x="0" y="32" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="28" font-weight="800" letter-spacing="-0.5">ChatGPT Plus Subscription</text>
+    <text x="0" y="62" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="15" font-weight="500">GPT-4o • Advanced Voice • DALL-E 3 • Custom GPTs</text>
+  </g>
+
+  <!-- Feature Pills -->
+  <g transform="translate(180, 520)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="18" cy="17" r="4" fill="#10A37F" />
+    <text x="30" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">GPT-4o Access</text>
+
+    <!-- Pill 2 -->
+    <rect x="155" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="173" cy="17" r="4" fill="#00D2FF" />
+    <text x="185" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">DALL-E 3</text>
+
+    <!-- Pill 3 -->
+    <rect x="310" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="328" cy="17" r="4" fill="#F59E0B" />
+    <text x="340" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Private Account</text>
+  </g>
+</svg>

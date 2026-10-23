@@ -127,12 +127,13 @@ export const CheckoutPage: React.FC = () => {
         {/* Left Column: Customer Form & Payment Method */}
         <div className="lg:col-span-7 space-y-6">
           {/* Section 1: Customer Details */}
-          <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+          {/* Section 1: Customer Details */}
+          <div className="p-4 sm:p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
               01. Delivery & Contact Information
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <label className="block text-xs font-medium text-slate-400 mb-1">
                   Full Name <span className="text-rose-400">*</span>
@@ -143,7 +144,7 @@ export const CheckoutPage: React.FC = () => {
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
                   placeholder="e.g. Divine Michael"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                 />
               </div>
 
@@ -157,12 +158,12 @@ export const CheckoutPage: React.FC = () => {
                   value={customerEmail}
                   onChange={(e) => setCustomerEmail(e.target.value)}
                   placeholder="For voucher credentials & receipt"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <label className="block text-xs font-medium text-slate-400 mb-1">
                   WhatsApp / Phone Number <span className="text-rose-400">*</span>
@@ -173,7 +174,7 @@ export const CheckoutPage: React.FC = () => {
                   value={customerPhone}
                   onChange={(e) => setCustomerPhone(e.target.value)}
                   placeholder="+234 or local phone format"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                 />
               </div>
 
@@ -186,7 +187,7 @@ export const CheckoutPage: React.FC = () => {
                   value={targetAccountUrl}
                   onChange={(e) => setTargetAccountUrl(e.target.value)}
                   placeholder="For marketing services (No passwords)"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400"
                 />
               </div>
             </div>
@@ -200,13 +201,13 @@ export const CheckoutPage: React.FC = () => {
                 value={specialInstructions}
                 onChange={(e) => setSpecialInstructions(e.target.value)}
                 placeholder="Specific devices for VPN, target niches, preferred contact hours..."
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400 resize-none"
+                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2.5 sm:py-2 text-sm sm:text-xs text-slate-100 placeholder:text-slate-600 focus:outline-none focus:border-cyan-400 resize-none"
               />
             </div>
           </div>
 
           {/* Section 2: Payment Method */}
-          <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
+          <div className="p-4 sm:p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
               02. Payment & Settlement Option
             </h3>
@@ -215,7 +216,7 @@ export const CheckoutPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setPaymentMethod('bank_transfer')}
-                className={`p-4 rounded-xl border text-left cursor-pointer transition-all ${
+                className={`p-3.5 sm:p-4 rounded-xl border text-left cursor-pointer transition-all ${
                   paymentMethod === 'bank_transfer'
                     ? 'bg-cyan-500/15 border-cyan-400 text-white shadow-xs'
                     : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
@@ -229,7 +230,7 @@ export const CheckoutPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setPaymentMethod('whatsapp_direct')}
-                className={`p-4 rounded-xl border text-left cursor-pointer transition-all ${
+                className={`p-3.5 sm:p-4 rounded-xl border text-left cursor-pointer transition-all ${
                   paymentMethod === 'whatsapp_direct'
                     ? 'bg-emerald-500/15 border-emerald-400 text-white shadow-xs'
                     : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
@@ -243,7 +244,7 @@ export const CheckoutPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setPaymentMethod('telegram_direct')}
-                className={`p-4 rounded-xl border text-left cursor-pointer transition-all ${
+                className={`p-3.5 sm:p-4 rounded-xl border text-left cursor-pointer transition-all ${
                   paymentMethod === 'telegram_direct'
                     ? 'bg-sky-500/15 border-sky-400 text-white shadow-xs'
                     : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
@@ -256,12 +257,12 @@ export const CheckoutPage: React.FC = () => {
             </div>
 
             {/* Official Payrep MFB Bank Box */}
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs space-y-3">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs space-y-2.5">
               <div className="flex items-center justify-between border-b border-slate-800 pb-2">
                 <span className="text-slate-400">Settlement Bank:</span>
                 <span className="font-bold text-white">{siteSettings.bankName}</span>
               </div>
-              <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+              <div className="flex flex-col xs:flex-row xs:items-center justify-between border-b border-slate-800 pb-2 gap-1">
                 <span className="text-slate-400">Account Number:</span>
                 <div className="flex items-center gap-2">
                   <span className="font-mono-numbers font-bold text-cyan-300 text-sm">
@@ -270,7 +271,7 @@ export const CheckoutPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleCopyAccount}
-                    className="p-1 text-slate-400 hover:text-cyan-300 cursor-pointer"
+                    className="p-1 text-slate-400 hover:text-cyan-300 cursor-pointer min-w-[28px] min-h-[28px] flex items-center justify-center"
                     title="Copy Account Number"
                   >
                     {copiedBank ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}

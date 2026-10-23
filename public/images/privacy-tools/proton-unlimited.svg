@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0814" />
+      <stop offset="50%" stop-color="#140E26" />
+      <stop offset="100%" stop-color="#06050E" />
+    </linearGradient>
+    <radialGradient id="protonGlow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#6D4AFF" stop-opacity="0.3" />
+      <stop offset="50%" stop-color="#8B5CF6" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A1230" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#0E0A1C" stop-opacity="0.95" />
+    </linearGradient>
+    <linearGradient id="protonPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8A67FF" />
+      <stop offset="50%" stop-color="#6D4AFF" />
+      <stop offset="100%" stop-color="#5327DB" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bgGrad)" />
+
+  <!-- Grid overlay -->
+  <g opacity="0.06" stroke="#6D4AFF" stroke-width="1">
+    <path d="M0 60 H800 M0 120 H800 M0 180 H800 M0 240 H800 M0 300 H800 M0 360 H800 M0 420 H800 M0 480 H800 M0 540 H800" />
+    <path d="M80 0 V600 M160 0 V600 M240 0 V600 M320 0 V600 M400 0 V600 M480 0 V600 M560 0 V600 M640 0 V600 M720 0 V600" />
+  </g>
+
+  <!-- Glow -->
+  <circle cx="400" cy="235" r="280" fill="url(#protonGlow)" />
+
+  <!-- Frame -->
+  <rect x="24" y="24" width="752" height="552" rx="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" />
+  <rect x="25" y="25" width="750" height="550" rx="27" fill="none" stroke="#6D4AFF" stroke-width="1" opacity="0.25" />
+
+  <!-- Central Card Platform -->
+  <rect x="270" y="105" width="260" height="260" rx="44" fill="url(#cardGrad)" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+
+  <!-- Proton Ribbon Monogram -->
+  <g transform="translate(400, 235)">
+    <!-- Plate -->
+    <rect x="-85" y="-85" width="170" height="170" rx="38" fill="url(#protonPurple)" />
+    <!-- Inner subtle ring -->
+    <rect x="-75" y="-75" width="150" height="150" rx="30" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2" />
+
+    <!-- Proton P-shaped ribbon folded geometry -->
+    <g transform="scale(1.15)">
+      <!-- Left Stem -->
+      <path d="M-28 -40 H-10 V40 H-28 Z" fill="#FFFFFF" rx="4" />
+      <!-- Arch / loop -->
+      <path d="M-10 -40 C14 -40 32 -24 32 0 C32 24 14 40 -10 40 V22 C6 22 14 12 14 0 C14 -12 6 -22 -10 -22 Z" fill="#FFFFFF" />
+      <!-- Fold shadow gradient piece -->
+      <path d="M-10 -22 H4 C12 -22 16 -12 16 0 C16 12 12 22 4 22 H-10" fill="none" stroke="#E0D4FC" stroke-width="2" opacity="0.5" />
+    </g>
+  </g>
+
+  <!-- Title & Details -->
+  <g transform="translate(400, 420)" text-anchor="middle">
+    <!-- Category pill -->
+    <rect x="-120" y="-32" width="240" height="28" rx="14" fill="rgba(109,74,255,0.12)" stroke="rgba(109,74,255,0.4)" stroke-width="1" />
+    <text x="0" y="-14" fill="#A78BFA" font-family="system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">SWISS PRIVACY SUITE</text>
+    
+    <!-- Title -->
+    <text x="0" y="32" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="28" font-weight="800" letter-spacing="-0.5">Proton Unlimited Suite</text>
+    <text x="0" y="62" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="15" font-weight="500">Proton Mail • Proton VPN • Drive • Pass • Swiss Encryption</text>
+  </g>
+
+  <!-- Feature Pills -->
+  <g transform="translate(180, 520)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="18" cy="17" r="4" fill="#8B5CF6" />
+    <text x="30" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">500 GB Storage</text>
+
+    <!-- Pill 2 -->
+    <rect x="155" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="173" cy="17" r="4" fill="#00D2FF" />
+    <text x="185" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Fast WireGuard</text>
+
+    <!-- Pill 3 -->
+    <rect x="310" y="0" width="130" height="34" rx="17" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" />
+    <circle cx="328" cy="17" r="4" fill="#10B981" />
+    <text x="340" y="22" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">End-to-End</text>
+  </g>
+</svg>

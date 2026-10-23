@@ -119,20 +119,20 @@ export const OrderLookupPage: React.FC = () => {
       </div>
 
       {/* Search Input Box */}
-      <form onSubmit={handleLookup} className="flex items-center gap-2 max-w-lg mx-auto">
+      <form onSubmit={handleLookup} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 max-w-lg mx-auto">
         <div className="relative flex-1">
           <input
             type="text"
             value={inputOrderId}
             onChange={(e) => setInputOrderId(e.target.value)}
             placeholder="Enter Order Reference (e.g. DL-84920)"
-            className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-10 pr-4 py-3 text-xs sm:text-sm text-white placeholder:text-slate-500 uppercase tracking-wider font-mono-numbers focus:outline-none focus:border-cyan-400"
+            className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-10 pr-4 py-3 text-sm sm:text-xs text-white placeholder:text-slate-500 uppercase tracking-wider font-mono-numbers focus:outline-none focus:border-cyan-400"
           />
-          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
         </div>
         <button
           type="submit"
-          className="px-6 py-3 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md shadow-cyan-500/10 cursor-pointer whitespace-nowrap"
+          className="px-6 py-3 min-h-[44px] bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-xs sm:text-sm rounded-xl transition-all shadow-md shadow-cyan-500/10 cursor-pointer whitespace-nowrap flex items-center justify-center"
         >
           Check Status
         </button>
@@ -142,7 +142,7 @@ export const OrderLookupPage: React.FC = () => {
       {hasSearched && (
         <div>
           {searchedOrder ? (
-            <div className="p-6 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 space-y-6 animate-in fade-in">
+            <div className="p-4 sm:p-8 rounded-2xl bg-slate-900 border border-slate-800 space-y-5 sm:space-y-6 animate-in fade-in">
               {/* Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
                 <div>
