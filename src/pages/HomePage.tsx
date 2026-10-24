@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 import { ProductCard } from '../components/ProductCard';
 import { CategorySidebar } from '../components/CategorySidebar';
+import { AnimatedSocialHero } from '../components/AnimatedSocialHero';
 import {
   ShieldCheck,
   Zap,
@@ -102,25 +103,14 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Hero Visual Showcase */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative aspect-16/10 rounded-xl overflow-hidden border border-slate-700/80 shadow-2xl bg-slate-950">
-              <img
-                src="/src/assets/images/hero_digital_workspace_1792747623257.jpg"
-                alt="Digital Logs Command Workspace"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-              <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-3 sm:left-3 sm:right-3 p-2.5 sm:p-3 rounded-lg bg-slate-900/90 backdrop-blur-md border border-slate-800 text-xs">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between text-slate-300 font-semibold mb-1 gap-1">
-                  <span>Payrep MFB Verified Settlement</span>
-                  <span className="text-cyan-400 font-mono-numbers">Acc: {siteSettings.bankAccountNumber}</span>
-                </div>
-                <p className="text-[10px] text-slate-400">
-                  Instant activation dispatch to WhatsApp & Email after transfer confirmation.
-                </p>
-              </div>
-            </div>
+          {/* Right Column: Animated Social Media Hero Illustration */}
+          <div className="lg:col-span-5 relative w-full">
+            <AnimatedSocialHero
+              onExploreServices={() => {
+                setActiveCategory('Facebook Marketing');
+                navigateTo('products');
+              }}
+            />
           </div>
         </div>
       </section>

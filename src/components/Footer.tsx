@@ -1,5 +1,6 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
+import { PaymentFooter } from './PaymentFooter';
 import {
   ShieldCheck,
   Send,
@@ -178,6 +179,14 @@ export const Footer: React.FC = () => {
                   Track Order Status
                 </button>
               </li>
+              <li>
+                <button
+                  onClick={() => navigateTo('add-funds')}
+                  className="hover:text-cyan-400 transition-colors cursor-pointer text-cyan-300 font-semibold"
+                >
+                  + Add Funds / Deposit
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -259,15 +268,10 @@ export const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Bottom bar */}
-        <div className="mt-10 pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-          <p>© {new Date().getFullYear()} Digital Logs. All rights reserved.</p>
-          <p className="text-center sm:text-right text-[10px] text-slate-600">
-            Digital Logs operates as an independent digital agency offering legitimate strategy, optimization, and authorized software license passes.
-          </p>
-        </div>
       </div>
+
+      {/* Full-width Black Payment-Methods & Copyright Footer */}
+      <PaymentFooter />
     </footer>
   );
 };

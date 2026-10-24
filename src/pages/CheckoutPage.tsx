@@ -10,7 +10,8 @@ import {
   AlertCircle,
   ArrowRight,
   ArrowLeft,
-  CheckCircle2
+  CheckCircle2,
+  Wallet
 } from 'lucide-react';
 
 export const CheckoutPage: React.FC = () => {
@@ -21,8 +22,10 @@ export const CheckoutPage: React.FC = () => {
     currency,
     siteSettings,
     createOrder,
+    payWithWallet,
     navigateTo,
     currentUser,
+    currentUserWallet,
     showToast
   } = useApp();
 
@@ -31,7 +34,7 @@ export const CheckoutPage: React.FC = () => {
   const [customerPhone, setCustomerPhone] = useState(currentUser?.phone || '');
   const [targetAccountUrl, setTargetAccountUrl] = useState('');
   const [specialInstructions, setSpecialInstructions] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState<'bank_transfer' | 'whatsapp_direct' | 'telegram_direct'>('bank_transfer');
+  const [paymentMethod, setPaymentMethod] = useState<'bank_transfer' | 'whatsapp_direct' | 'telegram_direct' | 'wallet_balance'>('bank_transfer');
   const [userConfirmedTransferNotice, setUserConfirmedTransferNotice] = useState(false);
   const [copiedBank, setCopiedBank] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -73,6 +76,23 @@ export const CheckoutPage: React.FC = () => {
     }
 
     setIsSubmitting(true);
+
+    if (paymentMethod === 'wallet_balance') {
+      const result = payWithWallet({
+        customerName,
+        customerEmail,
+        customerPhone,
+        items: cart,
+        totalNGN: cartTotalNGN,
+        targetAccountUrl: targetAccountUrl.trim() || undefined,
+        specialInstructions: specialInstructions.trim() || undefined
+      });
+      setIsSubmitting(false);
+      if (result.success && result.order) {
+        navigateTo('order-confirmation', { orderId: result.order.id });
+      }
+      return;
+    }
 
     const newOrder = createOrder({
       customerName,
@@ -212,7 +232,28 @@ export const CheckoutPage: React.FC = () => {
               02. Payment & Settlement Option
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <button
+                type="button"
+                onClick={() => setPaymentMethod('wallet_balance')}
+                className={`p-3.5 sm:p-4 rounded-xl border text-left cursor-pointer transition-all ${
+                  paymentMethod === 'wallet_balance'
+                    ? 'bg-cyan-500/15 border-cyan-400 text-white shadow-xs ring-1 ring-cyan-400/30'
+                    : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <Wallet className="w-5 h-5 text-cyan-400" />
+                  <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                    Instant
+                  </span>
+                </div>
+                <div className="text-xs font-bold text-white">Digital Logs Wallet</div>
+                <div className="text-[10px] text-cyan-300 font-mono-numbers mt-0.5">
+                  ₦ {(currentUserWallet?.balanceNGN || 0).toLocaleString('en-NG')} Available
+                </div>
+              </button>
+
               <button
                 type="button"
                 onClick={() => setPaymentMethod('bank_transfer')}
@@ -255,6 +296,40 @@ export const CheckoutPage: React.FC = () => {
                 <div className="text-[10px] text-slate-400 mt-0.5">Official channel order</div>
               </button>
             </div>
+
+            {/* Wallet Balance Info Panel if selected */}
+            {paymentMethod === 'wallet_balance' && (
+              <div className="p-4 rounded-xl bg-slate-950 border border-cyan-500/30 text-xs space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-300 font-semibold flex items-center gap-1.5">
+                    <Wallet className="w-4 h-4 text-cyan-400" />
+                    <span>Wallet Payment Verification</span>
+                  </span>
+                  <span className="font-mono-numbers font-extrabold text-cyan-400">
+                    ₦ {(currentUserWallet?.balanceNGN || 0).toLocaleString('en-NG')} Available
+                  </span>
+                </div>
+                {(currentUserWallet?.balanceNGN || 0) >= cartTotalNGN ? (
+                  <p className="text-emerald-400 text-[11px] font-medium">
+                    ✓ Your balance is sufficient. ₦ {cartTotalNGN.toLocaleString('en-NG')} will be deducted atomically and your order fulfilled immediately.
+                  </p>
+                ) : (
+                  <div className="text-rose-400 text-[11px] space-y-1">
+                    <p>
+                      ✗ Insufficient balance: You need ₦ {(cartTotalNGN - (currentUserWallet?.balanceNGN || 0)).toLocaleString('en-NG')} more to complete this order.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => navigateTo('add-funds')}
+                      className="text-cyan-400 underline font-bold cursor-pointer inline-flex items-center gap-1"
+                    >
+                      <span>Click here to Add Funds via Payrep MFB</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Official Payrep MFB Bank Box */}
             <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs space-y-2.5">

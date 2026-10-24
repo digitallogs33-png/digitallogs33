@@ -22,6 +22,7 @@ import { FAQPage } from './pages/FAQPage';
 import { AuthPages } from './pages/AuthPages';
 import { DashboardPage } from './pages/DashboardPage';
 import { AdminPage } from './pages/AdminPage';
+import { AddFundsPage } from './pages/AddFundsPage';
 import {
   PrivacyPolicyPage,
   TermsPage,
@@ -64,6 +65,8 @@ const MainLayout: React.FC = () => {
         return <AuthPages initialMode="register" />;
       case 'dashboard':
         return <DashboardPage />;
+      case 'add-funds':
+        return <AddFundsPage />;
       case 'admin':
         return <AdminPage />;
       case 'privacy':

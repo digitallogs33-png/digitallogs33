@@ -9,7 +9,11 @@ import {
   FAQItem,
   User,
   Currency,
-  OrderStatus
+  OrderStatus,
+  DepositRequest,
+  DepositStatus,
+  WalletTransaction,
+  UserWallet
 } from '../types';
 import {
   INITIAL_SETTINGS,
@@ -17,8 +21,12 @@ import {
   INITIAL_PRODUCTS,
   INITIAL_ORDERS,
   INITIAL_BLOGS,
-  INITIAL_FAQS
+  INITIAL_FAQS,
+  INITIAL_DEPOSITS,
+  INITIAL_WALLETS,
+  INITIAL_WALLET_TRANSACTIONS
 } from '../data/initialData';
+import { PaymentMethodConfig, PAYMENT_METHODS } from '../config/paymentMethods';
 
 interface NavigationParams {
   productId?: string;
@@ -62,13 +70,34 @@ interface AppContextType {
     customerPhone: string;
     items: CartItem[];
     totalNGN: number;
-    paymentMethod: 'bank_transfer' | 'whatsapp_direct' | 'telegram_direct';
+    paymentMethod: 'bank_transfer' | 'whatsapp_direct' | 'telegram_direct' | 'wallet_balance';
     paymentReference?: string;
     specialInstructions?: string;
     targetAccountUrl?: string;
   }) => Order;
   updateOrderStatus: (orderId: string, status: OrderStatus, adminNotes?: string) => void;
   submitPaymentProof: (orderId: string, reference: string, notes?: string) => boolean;
+
+  // Add Funds & Wallet System
+  deposits: DepositRequest[];
+  wallets: Record<string, UserWallet>;
+  walletTransactions: WalletTransaction[];
+  currentUserWallet: UserWallet;
+  getUserWallet: (email?: string) => UserWallet;
+  createDepositRequest: (amountNGN: number, paymentReference?: string, notes?: string) => { success: boolean; deposit?: DepositRequest; error?: string };
+  submitDepositProof: (depositId: string, paymentReference: string, notes?: string) => boolean;
+  cancelDepositRequest: (depositId: string) => boolean;
+  approveDepositRequest: (depositId: string, adminNotes?: string) => { success: boolean; message: string };
+  rejectDepositRequest: (depositId: string, reason: string) => { success: boolean; message: string };
+  payWithWallet: (orderData: {
+    customerName: string;
+    customerEmail: string;
+    customerPhone: string;
+    items: CartItem[];
+    totalNGN: number;
+    specialInstructions?: string;
+    targetAccountUrl?: string;
+  }) => { success: boolean; order?: Order; error?: string };
 
   // Navigation & Page State
   activePage: string;
@@ -102,10 +131,17 @@ interface AppContextType {
   deleteCategory: (id: string) => void;
   resetAllToDefault: () => void;
 
+  // Payment Methods
+  paymentMethods: PaymentMethodConfig[];
+  activePaymentMethods: PaymentMethodConfig[];
+  updatePaymentMethod: (id: string, updates: Partial<PaymentMethodConfig>) => void;
+  resetPaymentMethods: () => void;
+
   // Toast notifications
   toast: { message: string; type: 'success' | 'info' | 'error' } | null;
   showToast: (message: string, type?: 'success' | 'info' | 'error') => void;
 }
+
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
@@ -118,6 +154,10 @@ const STORAGE_KEYS = {
   USER: 'dl_user_v1',
   ADMIN: 'dl_is_admin_v1',
   CURRENCY: 'dl_currency_v1',
+  DEPOSITS: 'dl_deposits_v1',
+  WALLETS: 'dl_wallets_v1',
+  WALLET_TRANSACTIONS: 'dl_wallet_transactions_v1',
+  PAYMENT_METHODS: 'dl_payment_methods_v1',
 };
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -128,6 +168,33 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       return saved ? JSON.parse(saved) : INITIAL_SETTINGS;
     } catch {
       return INITIAL_SETTINGS;
+    }
+  });
+
+  const [deposits, setDeposits] = useState<DepositRequest[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.DEPOSITS);
+      return saved ? JSON.parse(saved) : INITIAL_DEPOSITS;
+    } catch {
+      return INITIAL_DEPOSITS;
+    }
+  });
+
+  const [wallets, setWallets] = useState<Record<string, UserWallet>>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.WALLETS);
+      return saved ? JSON.parse(saved) : INITIAL_WALLETS;
+    } catch {
+      return INITIAL_WALLETS;
+    }
+  });
+
+  const [walletTransactions, setWalletTransactions] = useState<WalletTransaction[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.WALLET_TRANSACTIONS);
+      return saved ? JSON.parse(saved) : INITIAL_WALLET_TRANSACTIONS;
+    } catch {
+      return INITIAL_WALLET_TRANSACTIONS;
     }
   });
 
@@ -212,6 +279,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   });
 
+  const [paymentMethods, setPaymentMethods] = useState<PaymentMethodConfig[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.PAYMENT_METHODS);
+      return saved ? JSON.parse(saved) : PAYMENT_METHODS;
+    } catch {
+      return PAYMENT_METHODS;
+    }
+  });
+
   const [currentUser, setCurrentUser] = useState<User | null>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.USER);
@@ -269,6 +345,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, [currency]);
 
   useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.PAYMENT_METHODS, JSON.stringify(paymentMethods));
+    } catch (e) {
+      console.error('Failed to sync payment methods to localStorage', e);
+    }
+  }, [paymentMethods]);
+
+  useEffect(() => {
     if (currentUser) {
       localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(currentUser));
     } else {
@@ -279,6 +363,18 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.ADMIN, isAdmin ? 'true' : 'false');
   }, [isAdmin]);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.DEPOSITS, JSON.stringify(deposits));
+  }, [deposits]);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.WALLETS, JSON.stringify(wallets));
+  }, [wallets]);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.WALLET_TRANSACTIONS, JSON.stringify(walletTransactions));
+  }, [walletTransactions]);
 
   // Toast handler
   const showToast = (message: string, type: 'success' | 'info' | 'error' = 'info') => {
@@ -350,7 +446,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     customerPhone: string;
     items: CartItem[];
     totalNGN: number;
-    paymentMethod: 'bank_transfer' | 'whatsapp_direct' | 'telegram_direct';
+    paymentMethod: 'bank_transfer' | 'whatsapp_direct' | 'telegram_direct' | 'wallet_balance';
     paymentReference?: string;
     specialInstructions?: string;
     targetAccountUrl?: string;
@@ -428,7 +524,333 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   };
 
+  // Add Funds & Wallet Operations
+  const getUserWallet = (email?: string): UserWallet => {
+    const targetEmail = (email || currentUser?.email || 'guest@digitallogs.net').toLowerCase().trim();
+    if (wallets[targetEmail]) {
+      return wallets[targetEmail];
+    }
+    return {
+      userId: currentUser?.id || `usr-${Date.now()}`,
+      userEmail: targetEmail,
+      balanceNGN: 0,
+      currency: 'NGN',
+      totalDepositedNGN: 0,
+      totalSpentNGN: 0,
+      lastUpdated: new Date().toISOString()
+    };
+  };
+
+  const currentUserWallet = getUserWallet(currentUser?.email);
+
+  const createDepositRequest = (
+    amountNGN: number,
+    paymentReference?: string,
+    notes?: string
+  ): { success: boolean; deposit?: DepositRequest; error?: string } => {
+    if (!currentUser) {
+      showToast('Please sign in or register to add funds to your wallet.', 'error');
+      return { success: false, error: 'Authentication required' };
+    }
+
+    const min = siteSettings.minDepositNGN || 2000;
+    const max = siteSettings.maxDepositNGN || 2000000;
+
+    if (isNaN(amountNGN) || amountNGN <= 0) {
+      showToast('Please enter a valid positive deposit amount.', 'error');
+      return { success: false, error: 'Invalid deposit amount' };
+    }
+
+    if (amountNGN < min) {
+      showToast(`Minimum deposit amount is ₦${min.toLocaleString('en-NG')}.`, 'error');
+      return { success: false, error: `Minimum deposit is ₦${min.toLocaleString('en-NG')}` };
+    }
+
+    if (amountNGN > max) {
+      showToast(`Maximum deposit limit per transaction is ₦${max.toLocaleString('en-NG')}.`, 'error');
+      return { success: false, error: `Maximum deposit limit is ₦${max.toLocaleString('en-NG')}` };
+    }
+
+    const randomSuffix = Math.floor(10000 + Math.random() * 90000);
+    const depositId = `DL-DEP-${randomSuffix}`;
+
+    const newDeposit: DepositRequest = {
+      id: depositId,
+      depositReference: depositId,
+      userId: currentUser.id,
+      userEmail: currentUser.email.toLowerCase().trim(),
+      userName: currentUser.name,
+      userPhone: currentUser.phone,
+      amountNGN,
+      status: paymentReference && paymentReference.trim().length > 0 ? 'under_review' : 'pending',
+      paymentMethod: 'bank_transfer',
+      bankName: siteSettings.bankName,
+      accountNumber: siteSettings.bankAccountNumber,
+      accountName: siteSettings.bankAccountName,
+      paymentReference: paymentReference?.trim() || '',
+      paymentProofNotes: notes?.trim() || '',
+      adminNotes: 'Deposit initialized. Awaiting customer bank transfer and transaction reference.',
+      createdAt: new Date().toISOString()
+    };
+
+    setDeposits((prev) => [newDeposit, ...prev]);
+    showToast(`Deposit request ${depositId} created for ₦${amountNGN.toLocaleString('en-NG')}`, 'success');
+    return { success: true, deposit: newDeposit };
+  };
+
+  const submitDepositProof = (depositId: string, reference: string, notes?: string): boolean => {
+    let found = false;
+    setDeposits((prev) =>
+      prev.map((dep) => {
+        if (dep.id === depositId) {
+          found = true;
+          return {
+            ...dep,
+            status: 'under_review',
+            paymentReference: reference.trim(),
+            paymentProofNotes: notes?.trim() || dep.paymentProofNotes,
+            adminNotes: `Payment reference "${reference.trim()}" submitted by customer. Awaiting admin bank statement reconciliation.`
+          };
+        }
+        return dep;
+      })
+    );
+
+    if (found) {
+      showToast('Payment reference submitted! Verification usually takes 5-15 minutes.', 'success');
+      return true;
+    } else {
+      showToast('Deposit record not found. Please verify the Reference ID.', 'error');
+      return false;
+    }
+  };
+
+  const cancelDepositRequest = (depositId: string): boolean => {
+    let cancelled = false;
+    setDeposits((prev) =>
+      prev.map((dep) => {
+        if (dep.id === depositId && (dep.status === 'pending' || dep.status === 'under_review')) {
+          cancelled = true;
+          return {
+            ...dep,
+            status: 'cancelled',
+            adminNotes: 'Deposit request cancelled by user prior to admin verification.'
+          };
+        }
+        return dep;
+      })
+    );
+    if (cancelled) {
+      showToast(`Deposit request ${depositId} has been cancelled.`, 'info');
+      return true;
+    }
+    return false;
+  };
+
+  // Atomic & Idempotent Approval
+  const approveDepositRequest = (
+    depositId: string,
+    adminNotes?: string
+  ): { success: boolean; message: string } => {
+    const deposit = deposits.find((d) => d.id === depositId);
+    if (!deposit) {
+      return { success: false, message: 'Deposit request not found.' };
+    }
+    if (deposit.status === 'approved') {
+      return { success: false, message: 'Deposit has already been approved and credited. Duplicate credit blocked.' };
+    }
+    if (deposit.status === 'cancelled') {
+      return { success: false, message: 'Cannot approve a cancelled deposit request.' };
+    }
+
+    const email = deposit.userEmail.toLowerCase().trim();
+    const currentWallet = wallets[email] || {
+      userId: deposit.userId,
+      userEmail: email,
+      balanceNGN: 0,
+      currency: 'NGN',
+      totalDepositedNGN: 0,
+      totalSpentNGN: 0,
+      lastUpdated: new Date().toISOString()
+    };
+
+    const balanceBefore = currentWallet.balanceNGN;
+    const balanceAfter = balanceBefore + deposit.amountNGN;
+    const txId = `WTX-${Date.now()}-${Math.floor(100 + Math.random() * 900)}`;
+
+    const newTx: WalletTransaction = {
+      id: txId,
+      userId: deposit.userId,
+      userEmail: email,
+      type: 'deposit_credit',
+      amountNGN: deposit.amountNGN,
+      balanceBeforeNGN: balanceBefore,
+      balanceAfterNGN: balanceAfter,
+      referenceId: deposit.id,
+      description: `Bank Transfer Deposit via Payrep MFB (Ref: ${deposit.paymentReference || deposit.depositReference})`,
+      createdAt: new Date().toISOString()
+    };
+
+    const updatedWallet: UserWallet = {
+      ...currentWallet,
+      balanceNGN: balanceAfter,
+      totalDepositedNGN: currentWallet.totalDepositedNGN + deposit.amountNGN,
+      lastUpdated: new Date().toISOString()
+    };
+
+    // Update wallet
+    setWallets((prev) => ({
+      ...prev,
+      [email]: updatedWallet
+    }));
+
+    // Append to immutable ledger
+    setWalletTransactions((prev) => [newTx, ...prev]);
+
+    // Update deposit request status
+    setDeposits((prev) =>
+      prev.map((d) =>
+        d.id === depositId
+          ? {
+              ...d,
+              status: 'approved',
+              reviewedAt: new Date().toISOString(),
+              reviewedBy: 'Administrator',
+              ledgerTransactionId: txId,
+              adminNotes: adminNotes || d.adminNotes || 'Bank transfer verified in Payrep MFB account. Wallet balance credited.'
+            }
+          : d
+      )
+    );
+
+    showToast(`Approved deposit ${deposit.id}! Credited ₦${deposit.amountNGN.toLocaleString('en-NG')} to ${deposit.userName}.`, 'success');
+    return { success: true, message: `Wallet successfully credited with ₦${deposit.amountNGN.toLocaleString('en-NG')}.` };
+  };
+
+  const rejectDepositRequest = (
+    depositId: string,
+    reason: string
+  ): { success: boolean; message: string } => {
+    if (!reason || !reason.trim()) {
+      showToast('A mandatory rejection reason is required.', 'error');
+      return { success: false, message: 'Rejection reason is required.' };
+    }
+
+    let found = false;
+    setDeposits((prev) =>
+      prev.map((d) => {
+        if (d.id === depositId) {
+          found = true;
+          return {
+            ...d,
+            status: 'rejected',
+            rejectionReason: reason.trim(),
+            reviewedAt: new Date().toISOString(),
+            reviewedBy: 'Administrator',
+            adminNotes: `Deposit rejected: ${reason.trim()}`
+          };
+        }
+        return d;
+      })
+    );
+
+    if (found) {
+      showToast(`Deposit request ${depositId} has been marked as rejected.`, 'info');
+      return { success: true, message: 'Deposit request rejected.' };
+    }
+    return { success: false, message: 'Deposit request not found.' };
+  };
+
+  const payWithWallet = (orderData: {
+    customerName: string;
+    customerEmail: string;
+    customerPhone: string;
+    items: CartItem[];
+    totalNGN: number;
+    specialInstructions?: string;
+    targetAccountUrl?: string;
+  }): { success: boolean; order?: Order; error?: string } => {
+    const email = (currentUser?.email || orderData.customerEmail).toLowerCase().trim();
+    const currentWallet = wallets[email] || {
+      userId: currentUser?.id || `usr-${Date.now()}`,
+      userEmail: email,
+      balanceNGN: 0,
+      currency: 'NGN',
+      totalDepositedNGN: 0,
+      totalSpentNGN: 0,
+      lastUpdated: new Date().toISOString()
+    };
+
+    if (currentWallet.balanceNGN < orderData.totalNGN) {
+      const deficit = orderData.totalNGN - currentWallet.balanceNGN;
+      showToast(`Insufficient wallet balance. You need ₦${deficit.toLocaleString('en-NG')} more.`, 'error');
+      return { success: false, error: 'Insufficient wallet balance' };
+    }
+
+    const randomSuffix = Math.floor(10000 + Math.random() * 90000);
+    const orderId = `DL-${randomSuffix}`;
+    const rate = siteSettings.usdExchangeRate > 0 ? siteSettings.usdExchangeRate : 1450;
+    const totalInCurrency = currency === 'USD' ? orderData.totalNGN / rate : orderData.totalNGN;
+
+    const balanceBefore = currentWallet.balanceNGN;
+    const balanceAfter = balanceBefore - orderData.totalNGN;
+    const txId = `WTX-${Date.now()}-${Math.floor(100 + Math.random() * 900)}`;
+
+    const newTx: WalletTransaction = {
+      id: txId,
+      userId: currentWallet.userId,
+      userEmail: email,
+      type: 'purchase_debit',
+      amountNGN: orderData.totalNGN,
+      balanceBeforeNGN: balanceBefore,
+      balanceAfterNGN: balanceAfter,
+      referenceId: orderId,
+      description: `Service Purchase for Order ${orderId} (${orderData.items.length} items)`,
+      createdAt: new Date().toISOString()
+    };
+
+    const updatedWallet: UserWallet = {
+      ...currentWallet,
+      balanceNGN: balanceAfter,
+      totalSpentNGN: currentWallet.totalSpentNGN + orderData.totalNGN,
+      lastUpdated: new Date().toISOString()
+    };
+
+    setWallets((prev) => ({
+      ...prev,
+      [email]: updatedWallet
+    }));
+
+    setWalletTransactions((prev) => [newTx, ...prev]);
+
+    const newOrder: Order = {
+      id: orderId,
+      createdAt: new Date().toISOString(),
+      customerName: orderData.customerName,
+      customerEmail: orderData.customerEmail,
+      customerPhone: orderData.customerPhone,
+      items: orderData.items,
+      totalNGN: orderData.totalNGN,
+      currency: currency,
+      exchangeRateUsed: rate,
+      totalInCurrency: totalInCurrency,
+      status: 'paid',
+      paymentMethod: 'wallet_balance',
+      paymentReference: txId,
+      specialInstructions: orderData.specialInstructions,
+      targetAccountUrl: orderData.targetAccountUrl,
+      adminNotes: `Payment debited from verified wallet balance. Tx ID: ${txId}. In queue for fulfillment.`
+    };
+
+    setOrders((prev) => [newOrder, ...prev]);
+    setCurrentOrder(newOrder);
+    clearCart();
+    showToast(`Order ${orderId} paid instantly using your wallet balance!`, 'success');
+    return { success: true, order: newOrder };
+  };
+
   // Navigation router
+
   const navigateTo = (page: string, params?: NavigationParams) => {
     setActivePage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -547,11 +969,34 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     showToast('Category deleted.', 'info');
   };
 
+  const activePaymentMethods = paymentMethods
+    .filter((method) => method.isActive)
+    .sort((a, b) => a.displayOrder - b.displayOrder);
+
+  const updatePaymentMethod = (id: string, updates: Partial<PaymentMethodConfig>) => {
+    setPaymentMethods((prev) =>
+      prev.map((method) => (method.id === id ? { ...method, ...updates } : method))
+    );
+    showToast('Payment method configuration updated.', 'success');
+  };
+
+  const resetPaymentMethods = () => {
+    setPaymentMethods(PAYMENT_METHODS);
+    try {
+      localStorage.setItem(STORAGE_KEYS.PAYMENT_METHODS, JSON.stringify(PAYMENT_METHODS));
+    } catch {}
+    showToast('Payment methods reset to default configuration.', 'info');
+  };
+
   const resetAllToDefault = () => {
     setSiteSettings(INITIAL_SETTINGS);
     setCategories(INITIAL_CATEGORIES);
     setProducts(INITIAL_PRODUCTS);
     setOrders(INITIAL_ORDERS);
+    setDeposits(INITIAL_DEPOSITS);
+    setWallets(INITIAL_WALLETS);
+    setWalletTransactions(INITIAL_WALLET_TRANSACTIONS);
+    setPaymentMethods(PAYMENT_METHODS);
     setCart([]);
     localStorage.clear();
     showToast('System configuration reset to default seed.', 'info');
@@ -584,6 +1029,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         createOrder,
         updateOrderStatus,
         submitPaymentProof,
+        deposits,
+        wallets,
+        walletTransactions,
+        currentUserWallet,
+        getUserWallet,
+        createDepositRequest,
+        submitDepositProof,
+        cancelDepositRequest,
+        approveDepositRequest,
+        rejectDepositRequest,
+        payWithWallet,
         activePage,
         selectedProductId,
         selectedBlogId,
@@ -607,6 +1063,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         addCategory,
         updateCategory,
         deleteCategory,
+        paymentMethods,
+        activePaymentMethods,
+        updatePaymentMethod,
+        resetPaymentMethods,
         resetAllToDefault,
         toast,
         showToast

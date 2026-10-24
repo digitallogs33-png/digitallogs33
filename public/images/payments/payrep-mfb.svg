@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 36" width="130" height="36" fill="none">
+  <!-- Payrep MFB Shield & Text -->
+  <g transform="translate(6, 6)">
+    <!-- Shield / Badge -->
+    <path d="M12 2L4 5.5V12C4 16.8 7.4 21.2 12 22.5C16.6 21.2 20 16.8 20 12V5.5L12 2Z" fill="#047857"/>
+    <path d="M12 4.2L6 7.4V11.8C6 15.4 8.5 18.8 12 19.9C15.5 18.8 18 15.4 18 11.8V7.4L12 4.2Z" fill="#065F46"/>
+    <!-- Checkmark inside -->
+    <path d="M9 12L11 14L15 9.5" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="36" y="17" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="800" fill="#064E3B" letter-spacing="0.3">PAYREP MFB</text>
+  <text x="36" y="26" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="7" font-weight="700" fill="#059669" letter-spacing="0.5">CENTRAL SETTLEMENT</text>
+</svg>

@@ -10,7 +10,8 @@ import {
   Send,
   MessageCircle,
   PackageSearch,
-  SlidersHorizontal
+  SlidersHorizontal,
+  Wallet
 } from 'lucide-react';
 
 export const Header: React.FC = () => {
@@ -25,6 +26,7 @@ export const Header: React.FC = () => {
     activePage,
     navigateTo,
     currentUser,
+    currentUserWallet,
     isAdmin,
     setActiveCategory
   } = useApp();
@@ -78,8 +80,18 @@ export const Header: React.FC = () => {
             </a>
           </div>
 
-          {/* Right: Currency switcher + Order Lookup */}
+          {/* Right: Currency switcher + Order Lookup + Add Funds */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0 ml-auto">
+            <button
+              onClick={() => navigateTo('add-funds')}
+              className="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 font-semibold transition-colors cursor-pointer py-1"
+            >
+              <Wallet className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+              <span className="text-[11px] sm:text-xs">Add Funds</span>
+            </button>
+
+            <span className="text-slate-700">|</span>
+
             <button
               onClick={() => navigateTo('order-lookup')}
               className="inline-flex items-center gap-1 text-slate-300 hover:text-white transition-colors cursor-pointer py-1"
@@ -214,6 +226,24 @@ export const Header: React.FC = () => {
             )}
           </button>
 
+          {/* Wallet / Add Funds button */}
+          <button
+            onClick={() => navigateTo('add-funds')}
+            className={`hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border transition-all cursor-pointer ${
+              activePage === 'add-funds'
+                ? 'bg-cyan-500 text-slate-950 border-cyan-400 font-bold shadow-xs'
+                : 'bg-slate-900 hover:bg-slate-800 text-cyan-400 border-slate-800 hover:border-cyan-500/40'
+            }`}
+            title="Deposit & Wallet Balance"
+          >
+            <Wallet className="w-3.5 h-3.5 text-cyan-400" />
+            {currentUser ? (
+              <span className="font-mono-numbers">₦ {(currentUserWallet?.balanceNGN || 0).toLocaleString('en-NG')}</span>
+            ) : (
+              <span>Add Funds</span>
+            )}
+          </button>
+
           {/* Account / Dashboard Button */}
           {currentUser ? (
             <button
@@ -305,6 +335,24 @@ export const Header: React.FC = () => {
             </div>
 
             <div className="pt-3 border-t border-slate-800/80 flex flex-col gap-1.5">
+              <button
+                onClick={() => {
+                  navigateTo('add-funds');
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center justify-between px-3.5 py-3 text-sm font-semibold text-cyan-400 bg-cyan-950/40 hover:bg-cyan-950/70 border border-cyan-500/30 rounded-lg text-left min-h-[44px] cursor-pointer"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Wallet className="w-4 h-4 shrink-0 text-cyan-400" />
+                  <span>Add Funds / Deposit</span>
+                </div>
+                {currentUser && (
+                  <span className="text-xs font-mono-numbers font-bold text-white bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
+                    ₦ {(currentUserWallet?.balanceNGN || 0).toLocaleString('en-NG')}
+                  </span>
+                )}
+              </button>
+
               <button
                 onClick={() => {
                   navigateTo('order-lookup');

@@ -63,13 +63,61 @@ export interface Order {
   exchangeRateUsed: number;
   totalInCurrency: number;
   status: OrderStatus;
-  paymentMethod: 'bank_transfer' | 'whatsapp_direct' | 'telegram_direct';
+  paymentMethod: 'bank_transfer' | 'whatsapp_direct' | 'telegram_direct' | 'wallet_balance';
   paymentReference?: string;
   paymentProofUrl?: string;
   paymentProofNotes?: string;
   adminNotes?: string;
   targetAccountUrl?: string;
   specialInstructions?: string;
+}
+
+export type DepositStatus = 'pending' | 'under_review' | 'approved' | 'rejected' | 'cancelled';
+
+export interface DepositRequest {
+  id: string; // e.g. "DL-DEP-84912"
+  depositReference: string; // narration / memo code to match bank transfer
+  userId: string;
+  userEmail: string;
+  userName: string;
+  userPhone?: string;
+  amountNGN: number;
+  status: DepositStatus;
+  paymentMethod: 'bank_transfer';
+  bankName: string;
+  accountNumber: string;
+  accountName: string;
+  paymentReference: string; // Customer-provided bank transaction ref
+  paymentProofNotes?: string;
+  adminNotes?: string;
+  rejectionReason?: string;
+  createdAt: string;
+  reviewedAt?: string;
+  reviewedBy?: string;
+  ledgerTransactionId?: string;
+}
+
+export interface WalletTransaction {
+  id: string;
+  userId: string;
+  userEmail: string;
+  type: 'deposit_credit' | 'purchase_debit' | 'refund_credit' | 'admin_adjustment';
+  amountNGN: number;
+  balanceBeforeNGN: number;
+  balanceAfterNGN: number;
+  referenceId: string; // deposit ID or order ID
+  description: string;
+  createdAt: string;
+}
+
+export interface UserWallet {
+  userId: string;
+  userEmail: string;
+  balanceNGN: number;
+  currency: 'NGN';
+  totalDepositedNGN: number;
+  totalSpentNGN: number;
+  lastUpdated: string;
 }
 
 export interface SiteSettings {
@@ -85,6 +133,8 @@ export interface SiteSettings {
   usdExchangeRate: number; // e.g. 1 USD = 1450 NGN
   announcementText: string;
   supportEmail: string;
+  minDepositNGN: number; // Minimum deposit in NGN
+  maxDepositNGN: number; // Maximum deposit in NGN
 }
 
 export interface BlogPost {
@@ -114,3 +164,4 @@ export interface User {
   role: 'customer' | 'admin';
   createdAt: string;
 }
+

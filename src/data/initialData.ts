@@ -1,4 +1,4 @@
-import { Product, Category, SiteSettings, BlogPost, FAQItem, Order } from '../types';
+import { Product, Category, SiteSettings, BlogPost, FAQItem, Order, DepositRequest, WalletTransaction, UserWallet } from '../types';
 
 export const INITIAL_SETTINGS: SiteSettings = {
   brandName: 'Digital Logs',
@@ -12,7 +12,9 @@ export const INITIAL_SETTINGS: SiteSettings = {
   paymentReferenceId: '1082058717',
   usdExchangeRate: 1450,
   announcementText: '⚡ Instant activation & fast manual bank verification via Payrep MFB. 24/7 WhatsApp & Telegram support available!',
-  supportEmail: 'support@digitallogs.net'
+  supportEmail: 'support@digitallogs.net',
+  minDepositNGN: 2000,
+  maxDepositNGN: 2000000
 };
 
 export const INITIAL_CATEGORIES: Category[] = [
@@ -725,6 +727,11 @@ export const INITIAL_FAQS: FAQItem[] = [
     category: 'Payment'
   },
   {
+    question: 'How does the Add Funds / Wallet Deposit system work?',
+    answer: 'You can fund your customer wallet balance directly by visiting /add-funds or clicking "Add Funds" in the header. Enter the amount in Nigerian Naira (₦), copy our Payrep MFB account details (Account: 2091223616, Name: DIVINE ELOZINO MICHAEL), and transfer the exact amount using your unique deposit narration reference. Once you submit your bank transaction reference, our admin reconciles the transaction and credits your wallet atomically. You can then use your wallet balance for instantaneous, zero-delay checkouts across any service.',
+    category: 'Payment'
+  },
+  {
     question: 'How does payment verification work?',
     answer: 'Once you transfer the funds via your banking app, submit your transaction reference or proof of transfer in our checkout confirmation window, or message our WhatsApp support desk at +880 1962-061283 with your order ID. Our team verifies the transfer with our bank statement and immediately dispatches your activation credentials.',
     category: 'Payment'
@@ -748,5 +755,92 @@ export const INITIAL_FAQS: FAQItem[] = [
     question: 'What is your refund policy if an issue arises?',
     answer: 'If an authorized subscription voucher fails to activate or cannot be fulfilled within our stated delivery window, you are entitled to an immediate replacement or full refund to your original bank account. Please review our detailed Refund Policy page for full terms.',
     category: 'General'
+  }
+];
+
+export const INITIAL_DEPOSITS: DepositRequest[] = [
+  {
+    id: 'DL-DEP-84192',
+    depositReference: 'DL-DEP-84192',
+    userId: 'usr-demo-1',
+    userEmail: 'chinedu.okonkwo@gmail.com',
+    userName: 'Chinedu Okonkwo',
+    userPhone: '+234 803 123 4567',
+    amountNGN: 25000,
+    status: 'approved',
+    paymentMethod: 'bank_transfer',
+    bankName: 'Payrep MFB',
+    accountNumber: '2091223616',
+    accountName: 'DIVINE ELOZINO MICHAEL',
+    paymentReference: 'PR-TRX-948102948',
+    paymentProofNotes: 'Transferred ₦25,000 from GTBank mobile app. Narration: DL-DEP-84192',
+    adminNotes: 'Verified against Payrep MFB statement #7412. Approved and credited.',
+    createdAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+    reviewedAt: new Date(Date.now() - 86400000 * 2 + 1800000).toISOString(),
+    reviewedBy: 'Admin (DIVINE)',
+    ledgerTransactionId: 'WTX-1001'
+  },
+  {
+    id: 'DL-DEP-93821',
+    depositReference: 'DL-DEP-93821',
+    userId: 'usr-demo-2',
+    userEmail: 'fatima.bello@yahoo.com',
+    userName: 'Fatima Bello',
+    userPhone: '+234 812 987 6543',
+    amountNGN: 50000,
+    status: 'under_review',
+    paymentMethod: 'bank_transfer',
+    bankName: 'Payrep MFB',
+    accountNumber: '2091223616',
+    accountName: 'DIVINE ELOZINO MICHAEL',
+    paymentReference: 'ZEN-NIP-20261023-8831',
+    paymentProofNotes: 'Zenith Bank instant transfer ₦50,000. Ref: ZEN-NIP-20261023-8831. Please credit my wallet for AI subscriptions.',
+    adminNotes: 'Payment ref submitted by customer. Awaiting morning ledger reconciliation.',
+    createdAt: new Date(Date.now() - 3600000 * 4).toISOString()
+  },
+  {
+    id: 'DL-DEP-95204',
+    depositReference: 'DL-DEP-95204',
+    userId: 'usr-demo-3',
+    userEmail: 'emeka.adebayo@outlook.com',
+    userName: 'Emeka Adebayo',
+    userPhone: '+234 901 445 6789',
+    amountNGN: 10000,
+    status: 'pending',
+    paymentMethod: 'bank_transfer',
+    bankName: 'Payrep MFB',
+    accountNumber: '2091223616',
+    accountName: 'DIVINE ELOZINO MICHAEL',
+    paymentReference: '',
+    paymentProofNotes: '',
+    adminNotes: 'Deposit initialized. Customer viewing Payrep MFB account details.',
+    createdAt: new Date(Date.now() - 1800000).toISOString()
+  }
+];
+
+export const INITIAL_WALLETS: Record<string, UserWallet> = {
+  'chinedu.okonkwo@gmail.com': {
+    userId: 'usr-demo-1',
+    userEmail: 'chinedu.okonkwo@gmail.com',
+    balanceNGN: 25000,
+    currency: 'NGN',
+    totalDepositedNGN: 25000,
+    totalSpentNGN: 0,
+    lastUpdated: new Date(Date.now() - 86400000 * 2).toISOString()
+  }
+};
+
+export const INITIAL_WALLET_TRANSACTIONS: WalletTransaction[] = [
+  {
+    id: 'WTX-1001',
+    userId: 'usr-demo-1',
+    userEmail: 'chinedu.okonkwo@gmail.com',
+    type: 'deposit_credit',
+    amountNGN: 25000,
+    balanceBeforeNGN: 0,
+    balanceAfterNGN: 25000,
+    referenceId: 'DL-DEP-84192',
+    description: 'Bank Transfer Deposit via Payrep MFB (Ref: PR-TRX-948102948)',
+    createdAt: new Date(Date.now() - 86400000 * 2 + 1800000).toISOString()
   }
 ];
